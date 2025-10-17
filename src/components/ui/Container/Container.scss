@@ -1,0 +1,27 @@
+// Container Component Styles
+// Контейнер для центрування контенту з максимальною шириною
+
+@import '@/styles/abstracts';
+
+.container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+
+  &--fluid {
+    max-width: 100%;
+  }
+
+  &--narrow {
+    max-width: $container-narrow;
+  }
+
+  &--wide {
+    max-width: $container-wide;
+  }
+
+  @include mobile {
+    padding: 0 $container-padding-mobile;
+  }
+}

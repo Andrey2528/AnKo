@@ -1,0 +1,647 @@
+// SCSS Mixins
+// Переміщувані міксіни для використання у всьому проекті
+
+@import './variables';
+
+// ============================================
+// RESPONSIVE BREAKPOINTS
+// ============================================
+
+// Media query для мобільних пристроїв
+@mixin mobile {
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+// Media query для планшетів
+@mixin tablet {
+  @media (min-width: $breakpoint-md) and (max-width: #{$breakpoint-lg - 1px}) {
+    @content;
+  }
+}
+
+// Media query для десктопів
+@mixin desktop {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+// Кастомний breakpoint
+@mixin respond-to($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// ============================================
+// FLEXBOX
+// ============================================
+
+// Flex center
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex column center
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// Flex между
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+// Обрізка тексту з ellipsis
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Багаторядковий ellipsis
+@mixin line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Gradient text
+@mixin gradient-text($gradient: $gradient-primary) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ============================================
+// TYPOGRAPHY PRESETS
+// ============================================
+
+// Large - Headers/Menu
+@mixin large-headers-menu {
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Large - Headers/MainTitle
+@mixin large-headers-main-title {
+  font-family: Montserrat;
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Large - Headers/H1
+@mixin large-headers-h1 {
+  font-family: Roboto;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+// Large - Headers/H2
+@mixin large-headers-h2 {
+  font-family: Roboto;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+// Expanded - Headers/Menu
+@mixin expanded-headers-menu {
+  font-family: Roboto;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Expanded - Headers/H1
+@mixin expanded-headers-h1 {
+  font-family: Roboto;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+// Expanded - Headers/H2
+@mixin expanded-headers-h2 {
+  font-family: Roboto;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+// Medium - Headers/MainTitle
+@mixin medium-headers-main-title {
+  font-family: Montserrat;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Medium - Headers/H1
+@mixin medium-headers-h1 {
+  font-family: Roboto;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+// Medium - Headers/H2
+@mixin medium-headers-h2 {
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+// Compact - Headers/MainTitle
+@mixin compact-headers-main-title {
+  font-family: Montserrat;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Compact - Headers/H1
+@mixin compact-headers-h1 {
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+// Compact - Headers/H2
+@mixin compact-headers-h2 {
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+// ============================================
+// BODY TYPOGRAPHY
+// ============================================
+
+// Large - Body/Description
+@mixin large-body-description {
+  font-family: "Roboto Mono";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Large - Body/NameBlock
+@mixin large-body-name-block {
+  font-family: "Roboto Mono";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: uppercase;
+}
+
+// Large - Body/Paragraph
+@mixin large-body-paragraph {
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
+
+// Large - Body/SecondaryText
+@mixin large-body-secondary-text {
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+// Medium - Body/NameBlock
+@mixin medium-body-name-block {
+  font-family: "Roboto Mono";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: uppercase;
+}
+
+// Medium - Body/Paragraph
+@mixin medium-body-paragraph {
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
+
+// Compact - Body/NameBlock
+@mixin compact-body-name-block {
+  font-family: "Roboto Mono";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+  text-transform: uppercase;
+}
+
+// Compact - Body/Paragraph
+@mixin compact-body-paragraph {
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
+
+// ============================================
+// SPECIAL TYPOGRAPHY
+// ============================================
+
+// Large - Special/Marquee
+@mixin large-special-marquee {
+  font-family: Roboto;
+  font-size: 80px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 100%;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Large - Special/Tag
+@mixin large-special-tag {
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Large - Special/Button
+@mixin large-special-button {
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Large - Special/ContactButton
+@mixin large-special-contact-button {
+  font-family: "Roboto Mono";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+}
+
+// Large - Special/FooterSocial
+@mixin large-special-footer-social {
+  font-family: "Roboto Mono";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+// Large - Special/ContactText
+@mixin large-special-contact-text {
+  font-family: Roboto;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Expanded - Special/Marquee
+@mixin expanded-special-marquee {
+  font-family: Roboto;
+  font-size: 54px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+// Medium - Special/Marquee
+@mixin medium-special-marquee {
+  font-family: Roboto;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 100%;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Medium - Special/Tag
+@mixin medium-special-tag {
+  font-family: Roboto;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Medium - Special/Button
+@mixin medium-special-button {
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Medium - Special/ContactText
+@mixin medium-special-contact-text {
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Compact - Special/Marquee
+@mixin compact-special-marquee {
+  font-family: Roboto;
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 100%;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Compact - Special/Tag
+@mixin compact-special-tag {
+  font-family: Roboto;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// Compact - Special/ContactText
+@mixin compact-special-contact-text {
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+  leading-trim: both;
+  text-edge: cap;
+}
+
+// ============================================
+// EFFECTS
+// ============================================
+
+// Box shadow
+@mixin box-shadow($shadow: $shadow-md) {
+  box-shadow: $shadow;
+}
+
+// Hover lift effect
+@mixin hover-lift($distance: -5px) {
+  transition: $transition-all;
+  
+  &:hover {
+    transform: translateY($distance);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// Focus ring
+@mixin focus-ring($color: $color-primary) {
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($color, 0.3);
+  }
+}
+
+// ============================================
+// LAYOUT
+// ============================================
+
+// Абсолютне центрування
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Overlay
+@mixin overlay($bg: rgba(0, 0, 0, 0.5)) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $bg;
+}
+
+// Full cover image
+@mixin cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// ============================================
+// BUTTONS
+// ============================================
+
+// Button reset
+@mixin button-reset {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+// Button base
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-md;
+  font-weight: $font-weight-semibold;
+  transition: $transition-all;
+  cursor: pointer;
+  border: none;
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+// Fade in animation
+@mixin fade-in($duration: 0.6s) {
+  animation: fadeIn $duration ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Slide in animation
+@mixin slide-in($direction: 'left', $duration: 0.6s) {
+  @if $direction == 'left' {
+    animation: slideInLeft $duration ease-out;
+  } @else if $direction == 'right' {
+    animation: slideInRight $duration ease-out;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// ============================================
+// UTILITY
+// ============================================
+
+// Clearfix
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// Визуально приховати елемент (для доступності)
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Скролбар кастомний
+@mixin custom-scrollbar($width: 8px, $thumb-color: $color-primary) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $color-bg-alt;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+    border-radius: $radius-full;
+    
+    &:hover {
+      background: darken($thumb-color, 10%);
+    }
+  }
+}
