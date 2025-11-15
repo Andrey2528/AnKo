@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Button } from '../../ui';
 import './Header.scss';
+import logoWhite from '../../../assets/images/Main logo white.svg';
 
 /**
  * Header Component
@@ -48,7 +49,7 @@ const Header = () => {
       <Container>
         <div className="header__content">
           <a href="#hero" className="header__logo">
-            <img src="/src/assets/images/Main logo white.svg" alt="AnKo Logo" />
+            <img src={logoWhite} alt="AnKo Logo" />
           </a>
 
           {/* Backdrop для мобільного меню */}

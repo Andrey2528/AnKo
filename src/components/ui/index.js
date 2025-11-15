@@ -5,3 +5,4 @@ export { default as Marquee } from './Marquee';
 export { default as Toast } from './Toast';
 export { default as SectionTitle } from './SectionTitle';
 export { default as ImageUpload } from './ImageUpload';
+export { default as LoadingSpinner } from './LoadingSpinner/LoadingSpinner';

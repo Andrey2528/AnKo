@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { DataProvider } from './contexts/DataContext';
+import { LoadingSpinner } from './components/ui';
 
 // Lazy loading для ВСІХ секцій та компонентів
 const Hero = lazy(() => import('./sections/_0_Herro/Hero'));
@@ -15,20 +16,6 @@ const Footer = lazy(() => import('./components/common/Footer/Footer'));
 const AdminPanel = lazy(() => import('./admin/AdminPanel'));
 const Page = lazy(() => import('./pages/Page'));
 
-// Loading компонент
-const LoadingFallback = () => (
-    <div style={{ 
-        padding: '40px', 
-        textAlign: 'center',
-        minHeight: '200px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }}>
-        Завантаження...
-    </div>
-);
-
 /**
  * Main App Component
  */
@@ -36,7 +23,7 @@ function MainContent() {
     return (
         <>
             <main>
-                <Suspense fallback={<LoadingFallback />}>
+                <Suspense fallback={<LoadingSpinner />}>
                     <Hero />
                     <About />
                     <Work />
@@ -58,7 +45,7 @@ function App() {
     return (
         <DataProvider>
             <div className="app">
-                <Suspense fallback={<LoadingFallback />}>
+                <Suspense fallback={<LoadingSpinner />}>
                     <Routes>
                         <Route path="/" element={<MainContent />} />
                         <Route path="/admin" element={<AdminPanel />} />

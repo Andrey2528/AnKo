@@ -4,7 +4,7 @@
     // градієнт/колір першими — вони накладаються на картинку
     background-image:
         linear-gradient(rgba(27, 4, 190, 1), rgba(2, 84, 217, 0.8)),
-        url('../assets/images/bg-texture.png');
+        url('/src/assets/images/bg-texture.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
