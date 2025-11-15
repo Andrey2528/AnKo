@@ -21,8 +21,6 @@ function MainContent() {
                 <Faq />
                 <Contact />
             </main>
-
-            <Footer />
         </>
     );
 }

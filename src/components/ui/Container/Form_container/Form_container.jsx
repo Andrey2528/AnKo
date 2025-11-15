@@ -1,25 +1,21 @@
 import React from 'react';
-import './Option_button.scss';
+import './Form_container.scss';
 
 /**
- * Option Button Component
+ * Form Container Component
  * 
- * Кнопка вибору опції для форм та калькуляторів
- * @param {boolean} active - Чи активна кнопка
- * @param {function} onClick - Обробник кліку
- * @param {string} children - Текст кнопки
+ * Контейнер для форм із стилізованим фоном та padding
+ * Використовується в Pricing та Contact секціях
+ * 
+ * @param {React.ReactNode} children - Вміст контейнера
  * @param {string} className - Додатковий клас
  */
-const Form_container = ({ active = false, onClick, children, className = '' }) => {
+const FormContainer = ({ children, className = '' }) => {
   return (
-    <button
-      className={`option-button ${active ? 'active' : ''} ${className}`}
-      onClick={onClick}
-      type="button"
-    >
+    <div className={`form-container ${className}`}>
       {children}
-    </button>
+    </div>
   );
 };
 
-export default Form_container;
+export default FormContainer;

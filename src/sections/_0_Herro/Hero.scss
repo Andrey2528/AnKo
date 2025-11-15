@@ -79,6 +79,17 @@
         display: flex;
         gap: $spacing_md;
         align-items: end;
+        &:hover{
+            color: $color_secondary_black_80;
+            background-color: transparent;
+            svg{
+                g{
+                    path{
+                        fill: $color_secondary_black_80;
+                    }
+                }
+            }
+        }
     }
 
     .container {

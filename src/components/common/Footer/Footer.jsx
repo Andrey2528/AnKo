@@ -13,45 +13,15 @@ const Footer = () => {
   return (
     <footer className="footer">
       <Container>
-        <div className="footer__content">
-          <div className="footer__section">
-            <h3 className="footer__title">AnKo</h3>
-            <p className="footer__description">
-              Професійні рішення для вашого бізнесу
-            </p>
+        <div className="footer__container">
+          <div className="mail">
+            <a href="mailto:hello.anko@gmail.com" className="footer__link">hello.anko@gmail.com</a>
           </div>
-
-          <div className="footer__section">
-            <h4 className="footer__subtitle">Навігація</h4>
-            <ul className="footer__links">
-              <li><a href="#about">Про нас</a></li>
-              <li><a href="#services">Послуги</a></li>
-              <li><a href="#portfolio">Портфоліо</a></li>
-              <li><a href="#contact">Контакти</a></li>
-            </ul>
+          <div className="footer__links">
+            <a href="/privacy" className="footer__link">LinkedIn</a>
+            <a href="/terms" className="footer__link">Dribbble</a>
+            <a href="/contact" className="footer__link">Instagram</a>
           </div>
-
-          <div className="footer__section">
-            <h4 className="footer__subtitle">Контакти</h4>
-            <ul className="footer__links">
-              <li>Email: info@anko.com</li>
-              <li>Телефон: +380 XX XXX XX XX</li>
-              <li>Адреса: м. Київ, Україна</li>
-            </ul>
-          </div>
-
-          <div className="footer__section">
-            <h4 className="footer__subtitle">Соціальні мережі</h4>
-            <div className="footer__socials">
-              <a href="#" aria-label="Facebook">FB</a>
-              <a href="#" aria-label="Instagram">IG</a>
-              <a href="#" aria-label="LinkedIn">LI</a>
-            </div>
-          </div>
-        </div>
-
-        <div className="footer__bottom">
-          <p>&copy; {currentYear} AnKo. Всі права захищені.</p>
         </div>
       </Container>
     </footer>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Marquee, SectionTitle, OptionButton } from '../../components/ui';
+import { Container, Marquee, SectionTitle, OptionButton, FormContainer } from '../../components/ui';
 import './Pricing.scss';
 
 /**
@@ -354,36 +354,34 @@ const Pricing = () => {
               BOT
             </button>
           </div>
-        <div className="pricing__calculator">
-          
-
-          <div className="pricing__header">
-            <div className="pricing__estimate">
-              Est: {estimatedPrice.toLocaleString()} $
+        <FormContainer className="pricing__calculator">
+            <div className="pricing__header">
+              <div className="pricing__estimate">
+                Est: {estimatedPrice.toLocaleString()} $
+              </div>
             </div>
-          </div>
 
-          {/* Dynamic Questions based on service type */}
-          {renderQuestions()}
+            {/* Dynamic Questions based on service type */}
+            {renderQuestions()}
 
-          {/* Footer */}
-          <div className="pricing__footer">
-            <p className="pricing__disclaimer">
-              Our pricing calculator provides a quick estimate to get you started, but your unique vision may entail specific needs that could adjust the final cost. The pricing here isn't set in stone and will depend heavily on the final scope of your project.
-            </p>
+            {/* Footer */}
+            <div className="pricing__footer">
+              <p className="pricing__disclaimer">
+                Our pricing calculator provides a quick estimate to get you started, but your unique vision may entail specific needs that could adjust the final cost. The pricing here isn't set in stone and will depend heavily on the final scope of your project.
+              </p>
 
-            <a href="#contact" className="pricing__cta">
-              <span className="pricing__cta-text">
-                <span>Contact</span>
-                Ready to Elevate
-                Your Brand?
-              </span>
-              <svg className="pricing__cta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-          </div>
-        </div>
+              <a href="#contact" className="pricing__cta">
+                <span className="pricing__cta-text">
+                  <span>Contact</span>
+                  Ready to Elevate
+                  Your Brand?
+                </span>
+                <svg className="pricing__cta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+            </div>
+        </FormContainer>
       </Container>
     </section>
   );
