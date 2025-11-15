@@ -52,6 +52,71 @@ const defaultHomeSections = {
       }
     ]
   },
+  process: {
+    title: "04. Our Process",
+    items: [
+      {
+        id: 1,
+        title: "Idea Discussion",
+        description: "We discuss your ideas and requirements in detail."
+      },
+      {
+        id: 2,
+        title: "Design & Planning",
+        description: "Creating wireframes and design mockups for your approval."
+      },
+      {
+        id: 3,
+        title: "Development",
+        description: "Building your project with clean, maintainable code."
+      },
+      {
+        id: 4,
+        title: "Testing & Launch",
+        description: "Thorough testing before deploying to production."
+      }
+    ]
+  },
+  pricing: {
+    title: "05. Pricing",
+    marqueeText: "Fair & Transparent Pricing. Fair & Transparent Pricing.",
+    serviceTypes: ["web", "photo", "branding", "bot"]
+  },
+  faq: {
+    title: "06. FREQUENTLY ASKED QUESTIONS",
+    items: [
+      {
+        id: 1,
+        question: "How long does a typical project take?",
+        answer: "The timeline varies depending on the project scope and complexity. A typical website project takes 4-8 weeks, while branding projects usually require 2-4 weeks. We provide a detailed timeline during the initial consultation."
+      },
+      {
+        id: 2,
+        question: "Do you offer ongoing support and maintenance?",
+        answer: "Yes, we offer various support and maintenance packages to ensure your website or brand materials stay up-to-date and function smoothly. We can discuss the best option for your needs."
+      },
+      {
+        id: 3,
+        question: "Can I see examples of your previous work?",
+        answer: "Absolutely! You can view our portfolio showcasing a variety of projects we have completed. Each project demonstrates our commitment to quality and creativity."
+      },
+      {
+        id: 4,
+        question: "What kind of support can I expect post-launch?",
+        answer: "Absolutely, at ANKO, we understand that budgeting is essential. We offer various payment plans to make our web design, branding, and visual identity services accessible to everyone, regardless of budget constraints."
+      },
+      {
+        id: 5,
+        question: "Do you offer custom design, or do you use templates?",
+        answer: "We specialize in custom design tailored to your unique brand and business needs. While templates can be a starting point, we always customize them extensively to ensure your project stands out."
+      },
+      {
+        id: 6,
+        question: "How will I be involved in the project?",
+        answer: "We believe in collaborative work. You will be involved at every stage of the project, from initial concept to final delivery. Regular check-ins and feedback sessions ensure the final product meets your vision."
+      }
+    ]
+  },
   contact: {
     title: "Get In Touch",
     subtitle: "Let's work together",

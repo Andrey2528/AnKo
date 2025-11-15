@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AdminSidebar, ProjectsTab, PagesTab, HomeTab, MigrationTab } from './components';
+import { AdminSidebar, DashboardTab, ProjectsTab, PagesTab, HomeTab, MigrationTab } from './components';
 import './AdminPanel.scss';
 
 /**
@@ -8,13 +8,14 @@ import './AdminPanel.scss';
  * Main admin dashboard with sidebar navigation and content tabs
  */
 export default function AdminPanel() {
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState('dashboard');
 
   return (
     <div className="admin-root">
       <AdminSidebar activeTab={activeTab} onTabChange={setActiveTab} />
 
       <main className="admin-content">
+        {activeTab === 'dashboard' && <DashboardTab />}
         {activeTab === 'home' && <HomeTab />}
         {activeTab === 'pages' && <PagesTab />}
         {activeTab === 'migration' && <MigrationTab />}

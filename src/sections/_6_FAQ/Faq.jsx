@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, SectionTitle } from '../../components/ui';
 import './Faq.scss';
+import { loadHomeSections } from '../../api/firestore/homeSections';
 
 /**
  * FAQ Section
@@ -9,49 +10,41 @@ import './Faq.scss';
  */
 const Faq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [faqData, setFaqData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const faqData = [
-    {
-      question: 'How long does a typical project take?',
-      answer: 'The timeline varies depending on the project scope and complexity. A typical website project takes 4-8 weeks, while branding projects usually require 2-4 weeks. We provide a detailed timeline during the initial consultation.'
-    },
-    {
-      question: 'Do you offer ongoing support and maintenance?',
-      answer: 'Yes, we offer various support and maintenance packages to ensure your website or brand materials stay up-to-date and function smoothly. We can discuss the best option for your needs.'
-    },
-    {
-      question: 'Can I see examples of your previous work?',
-      answer: 'Absolutely! You can view our portfolio showcasing a variety of projects we have completed. Each project demonstrates our commitment to quality and creativity.'
-    },
-    {
-      question: 'What kind of support can I expect post-launch?',
-      answer: 'Absolutely, at ANKO, we understand that budgeting is essential. We offer various payment plans to make our web design, branding, and visual identity services accessible to everyone, regardless of budget constraints.'
-    },
-    {
-      question: 'Do you offer custom design, or do you use templates?',
-      answer: 'We specialize in custom design tailored to your unique brand and business needs. While templates can be a starting point, we always customize them extensively to ensure your project stands out.'
-    },
-    {
-      question: 'How will I be involved in the project?',
-      answer: 'We believe in collaborative work. You will be involved at every stage of the project, from initial concept to final delivery. Regular check-ins and feedback sessions ensure the final product meets your vision.'
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const sections = await loadHomeSections();
+        setFaqData(sections.faq);
+      } catch (error) {
+        console.error('Error loading FAQ data:', error);
+      } finally {
+        setLoading(false);
+      }
     }
-  ];
+
+    fetchData();
+  }, []);
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  if (loading || !faqData) return null;
+
   return (
     <section id="faq" className="faq">
       <Container>
         <div className="faq__header">
-          <SectionTitle title="06. FREQUENTLY ASKED QUESTIONS" theme='white'/>
+          <SectionTitle title={faqData.title || "06. FREQUENTLY ASKED QUESTIONS"} theme='white'/>
         </div>
 
         <div className="faq__list">
-          {faqData.map((item, index) => (
+          {faqData.items && faqData.items.map((item, index) => (
             <div 
-              key={index} 
+              key={item.id || index} 
               className={`faq__item ${activeIndex === index ? 'faq__item--active' : ''}`}
             >
               <button 

@@ -1,4 +1,5 @@
 export { default as AdminSidebar } from './AdminSidebar';
+export { default as DashboardTab } from './DashboardTab';
 export { default as HomeTab } from './HomeTab';
 export { default as ProjectsTab } from './ProjectsTab';
 export { default as PagesTab } from './PagesTab';

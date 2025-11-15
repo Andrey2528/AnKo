@@ -13,7 +13,20 @@ export default function HomeTab() {
     async function fetchSections() {
       try {
         const data = await loadHomeSections();
-        setSections(data);
+        
+        // Ensure all sections exist with default values
+        const completeData = {
+          hero: data.hero || { title: '', buttonText: '', buttonLink: '' },
+          about: data.about || { title: '', mainText: '', secondaryText: '', stats: [] },
+          services: data.services || { title: '', subtitle: '', items: [] },
+          process: data.process || { title: '04. Our Process', items: [] },
+          pricing: data.pricing || { title: '05. Pricing', marqueeText: 'Fair & Transparent Pricing.', serviceTypes: [] },
+          faq: data.faq || { title: '06. FREQUENTLY ASKED QUESTIONS', items: [] },
+          work: data.work || { marqueeText: '', title: '' },
+          contact: data.contact || { title: '', subtitle: '', formFields: [], submitButtonText: '' }
+        };
+        
+        setSections(completeData);
       } catch (error) {
         console.error('Error loading sections:', error);
         setToast({ message: 'Помилка завантаження даних', type: 'error' });
@@ -44,8 +57,10 @@ export default function HomeTab() {
     { id: 'hero', label: 'Hero Section', icon: '🚀' },
     { id: 'about', label: 'About Section', icon: '👥' },
     { id: 'services', label: 'Services', icon: '⚙️' },
-    { id: 'work', label: 'Work Projects', icon: '�' },
-    { id: 'contact', label: 'Contact', icon: '�' },
+    { id: 'process', label: 'Process', icon: '🔄' },
+    { id: 'faq', label: 'FAQ', icon: '❓' },
+    { id: 'work', label: 'Work Projects', icon: '💼' },
+    { id: 'contact', label: 'Contact', icon: '📧' },
   ];
 
   return (
@@ -78,6 +93,12 @@ export default function HomeTab() {
           )}
           {activeSection === 'services' && (
             <ServicesEditor data={sections.services} onSave={(data) => handleSave('services', data)} />
+          )}
+          {activeSection === 'process' && (
+            <ProcessEditor data={sections.process} onSave={(data) => handleSave('process', data)} />
+          )}
+          {activeSection === 'faq' && (
+            <FaqEditor data={sections.faq} onSave={(data) => handleSave('faq', data)} />
           )}
           {activeSection === 'contact' && (
             <ContactEditor data={sections.contact} onSave={(data) => handleSave('contact', data)} />
@@ -505,6 +526,230 @@ function WorkEditor({ data, onSave }) {
             placeholder="02. Work" 
           />
         </div>
+
+        <div className="admin-form-actions">
+          <button type="submit" className="btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+// Process Section Editor
+function ProcessEditor({ data, onSave }) {
+  const [form, setForm] = useState(data || { title: '04. Our Process', items: [] });
+
+  useEffect(() => {
+    setForm(data || { title: '04. Our Process', items: [] });
+  }, [data]);
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function handleItemChange(index, field, value) {
+    const newItems = [...(form.items || [])];
+    newItems[index][field] = value;
+    setForm((prev) => ({ ...prev, items: newItems }));
+  }
+
+  function addItem() {
+    const newItem = {
+      id: Date.now(),
+      title: '',
+      description: ''
+    };
+    setForm((prev) => ({
+      ...prev,
+      items: [...(prev.items || []), newItem]
+    }));
+  }
+
+  function removeItem(index) {
+    const newItems = (form.items || []).filter((_, idx) => idx !== index);
+    setForm((prev) => ({ ...prev, items: newItems }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSave(form);
+  }
+
+  return (
+    <div className="admin-panel">
+      <h3>Process Section Settings</h3>
+      <form className="admin-form" onSubmit={handleSubmit}>
+        <div className="admin-form-row">
+          <label>Section Title</label>
+          <input 
+            name="title" 
+            value={form.title || ''} 
+            onChange={handleChange} 
+            placeholder="04. Our Process" 
+          />
+        </div>
+
+        <h4 style={{ marginTop: '24px', marginBottom: '16px', color: '#fff' }}>Process Steps</h4>
+        {form.items?.map((item, idx) => (
+          <div key={item.id || idx} style={{ marginBottom: '16px', padding: '16px', background: '#0f0f0f', borderRadius: '6px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+              <h5 style={{ color: '#1e90ff', margin: 0 }}>Step {idx + 1}</h5>
+              <button 
+                type="button" 
+                onClick={() => removeItem(idx)}
+                style={{ background: '#dc3545', color: '#fff', border: 'none', padding: '4px 12px', borderRadius: '4px', cursor: 'pointer' }}
+              >
+                Remove
+              </button>
+            </div>
+            <div className="admin-form-row">
+              <label>Title</label>
+              <input 
+                value={item.title} 
+                onChange={(e) => handleItemChange(idx, 'title', e.target.value)} 
+                placeholder="Idea Discussion" 
+              />
+            </div>
+            <div className="admin-form-row">
+              <label>Description</label>
+              <textarea 
+                value={item.description} 
+                onChange={(e) => handleItemChange(idx, 'description', e.target.value)} 
+                placeholder="We discuss your ideas and requirements in detail."
+                rows={3}
+              />
+            </div>
+          </div>
+        ))}
+
+        <button 
+          type="button" 
+          onClick={addItem}
+          style={{ 
+            background: '#28a745', 
+            color: '#fff', 
+            border: 'none', 
+            padding: '10px 20px', 
+            borderRadius: '4px', 
+            cursor: 'pointer',
+            marginBottom: '20px'
+          }}
+        >
+          + Add Process Step
+        </button>
+
+        <div className="admin-form-actions">
+          <button type="submit" className="btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+// FAQ Section Editor
+function FaqEditor({ data, onSave }) {
+  const [form, setForm] = useState(data || { title: '06. FREQUENTLY ASKED QUESTIONS', items: [] });
+
+  useEffect(() => {
+    setForm(data || { title: '06. FREQUENTLY ASKED QUESTIONS', items: [] });
+  }, [data]);
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function handleItemChange(index, field, value) {
+    const newItems = [...(form.items || [])];
+    newItems[index][field] = value;
+    setForm((prev) => ({ ...prev, items: newItems }));
+  }
+
+  function addItem() {
+    const newItem = {
+      id: Date.now(),
+      question: '',
+      answer: ''
+    };
+    setForm((prev) => ({
+      ...prev,
+      items: [...(prev.items || []), newItem]
+    }));
+  }
+
+  function removeItem(index) {
+    const newItems = (form.items || []).filter((_, idx) => idx !== index);
+    setForm((prev) => ({ ...prev, items: newItems }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSave(form);
+  }
+
+  return (
+    <div className="admin-panel">
+      <h3>FAQ Section Settings</h3>
+      <form className="admin-form" onSubmit={handleSubmit}>
+        <div className="admin-form-row">
+          <label>Section Title</label>
+          <input 
+            name="title" 
+            value={form.title || ''} 
+            onChange={handleChange} 
+            placeholder="06. FREQUENTLY ASKED QUESTIONS" 
+          />
+        </div>
+
+        <h4 style={{ marginTop: '24px', marginBottom: '16px', color: '#fff' }}>FAQ Items</h4>
+        {form.items?.map((item, idx) => (
+          <div key={item.id || idx} style={{ marginBottom: '16px', padding: '16px', background: '#0f0f0f', borderRadius: '6px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+              <h5 style={{ color: '#1e90ff', margin: 0 }}>Question {idx + 1}</h5>
+              <button 
+                type="button" 
+                onClick={() => removeItem(idx)}
+                style={{ background: '#dc3545', color: '#fff', border: 'none', padding: '4px 12px', borderRadius: '4px', cursor: 'pointer' }}
+              >
+                Remove
+              </button>
+            </div>
+            <div className="admin-form-row">
+              <label>Question</label>
+              <input 
+                value={item.question} 
+                onChange={(e) => handleItemChange(idx, 'question', e.target.value)} 
+                placeholder="How long does a typical project take?" 
+              />
+            </div>
+            <div className="admin-form-row">
+              <label>Answer</label>
+              <textarea 
+                value={item.answer} 
+                onChange={(e) => handleItemChange(idx, 'answer', e.target.value)} 
+                placeholder="The timeline varies depending on the project scope..."
+                rows={4}
+              />
+            </div>
+          </div>
+        ))}
+
+        <button 
+          type="button" 
+          onClick={addItem}
+          style={{ 
+            background: '#28a745', 
+            color: '#fff', 
+            border: 'none', 
+            padding: '10px 20px', 
+            borderRadius: '4px', 
+            cursor: 'pointer',
+            marginBottom: '20px'
+          }}
+        >
+          + Add FAQ Item
+        </button>
 
         <div className="admin-form-actions">
           <button type="submit" className="btn-primary">Save Changes</button>

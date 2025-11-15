@@ -5,14 +5,14 @@ import './MigrationTab.scss';
 /**
  * Migration Tab Component
  * 
- * Allows migrating data from localStorage to Firestore
+ * Дозволяє мігрувати дані з localStorage в Firestore
  */
 const MigrationTab = () => {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleMigrate = async () => {
-    if (!confirm('Start migration from localStorage to Firestore?\n\nThis will copy all data to Firebase.')) {
+    if (!confirm('Почати міграцію з localStorage в Firestore?\n\nЦе скопіює всі дані в Firebase.')) {
       return;
     }
 
@@ -37,7 +37,7 @@ const MigrationTab = () => {
       await exportToLocalStorage();
       setStatus({ 
         success: true, 
-        message: 'Data exported to localStorage as backup' 
+        message: 'Дані експортовано в localStorage як резервну копію' 
       });
     } catch (error) {
       setStatus({ success: false, message: error.message });
@@ -51,7 +51,7 @@ const MigrationTab = () => {
     if (cleared) {
       setStatus({ 
         success: true, 
-        message: 'Old localStorage data cleared' 
+        message: 'Старі дані localStorage очищено' 
       });
     }
   };
@@ -74,24 +74,24 @@ const MigrationTab = () => {
   return (
     <div className="migration-tab">
       <div className="migration-tab__header">
-        <h2>Data Migration</h2>
-        <p>Migrate data from localStorage to Firebase Firestore</p>
+        <h2>Міграція Даних</h2>
+        <p>Перенесення даних з localStorage в Firebase Firestore</p>
       </div>
 
       <div className="migration-tab__status">
-        <h3>LocalStorage Status</h3>
+        <h3>Статус LocalStorage</h3>
         <div className="migration-tab__checks">
           <div className={`check ${localData.hasHomeSections ? 'check--found' : 'check--empty'}`}>
             <span className="check__icon">{localData.hasHomeSections ? '✓' : '○'}</span>
-            <span className="check__label">Home Sections</span>
+            <span className="check__label">Секції головної</span>
           </div>
           <div className={`check ${localData.hasProjects ? 'check--found' : 'check--empty'}`}>
             <span className="check__icon">{localData.hasProjects ? '✓' : '○'}</span>
-            <span className="check__label">Projects</span>
+            <span className="check__label">Проєкти</span>
           </div>
           <div className={`check ${localData.hasPages ? 'check--found' : 'check--empty'}`}>
             <span className="check__icon">{localData.hasPages ? '✓' : '○'}</span>
-            <span className="check__label">Pages</span>
+            <span className="check__label">Сторінки</span>
           </div>
         </div>
       </div>
@@ -108,7 +108,7 @@ const MigrationTab = () => {
           disabled={loading || localData.isEmpty}
           className="migration-tab__button migration-tab__button--primary"
         >
-          {loading ? 'Migrating...' : '🚀 Migrate to Firestore'}
+          {loading ? 'Міграція...' : '🚀 Мігрувати в Firestore'}
         </button>
 
         <button
@@ -116,7 +116,7 @@ const MigrationTab = () => {
           disabled={loading}
           className="migration-tab__button migration-tab__button--secondary"
         >
-          💾 Export Firestore to Backup
+          💾 Експортувати Firestore в Backup
         </button>
 
         <button
@@ -124,29 +124,29 @@ const MigrationTab = () => {
           disabled={loading || localData.isEmpty}
           className="migration-tab__button migration-tab__button--danger"
         >
-          🗑️ Clear Old LocalStorage
+          🗑️ Очистити Старий LocalStorage
         </button>
       </div>
 
       <div className="migration-tab__info">
-        <h3>Migration Steps</h3>
+        <h3>Кроки міграції</h3>
         <ol>
           <li>
-            <strong>Migrate to Firestore:</strong> Copies all localStorage data to Firebase
+            <strong>Мігрувати в Firestore:</strong> Копіює всі дані з localStorage в Firebase
           </li>
           <li>
-            <strong>Verify:</strong> Check that data appears correctly in admin panels
+            <strong>Перевірити:</strong> Переконайтесь, що дані правильно відображаються в адмін панелях
           </li>
           <li>
-            <strong>Export Backup:</strong> (Optional) Save Firestore data to localStorage backup
+            <strong>Експортувати Backup:</strong> (Опціонально) Зберегти дані Firestore в localStorage як резервну копію
           </li>
           <li>
-            <strong>Clear Old Data:</strong> Remove old localStorage entries
+            <strong>Очистити Старі Дані:</strong> Видалити старі записи localStorage
           </li>
         </ol>
 
         <div className="migration-tab__warning">
-          ⚠️ <strong>Important:</strong> Make sure Firebase is properly configured before migrating!
+          ⚠️ <strong>Важливо:</strong> Переконайтесь, що Firebase правильно налаштовано перед міграцією!
         </div>
       </div>
     </div>
