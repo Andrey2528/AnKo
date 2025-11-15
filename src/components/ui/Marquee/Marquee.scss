@@ -1,0 +1,76 @@
+@use '../../../styles/abstracts/index' as *;
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 96px;
+
+    &__track {
+        display: flex;
+        gap: var(--marquee-gap, 40px);
+        align-items: center;
+        white-space: nowrap;
+        will-change: transform;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-duration: var(--marquee-duration, 10s);
+        flex-wrap: nowrap;
+        /* гарантируем что трек займет ширину контента */
+        min-width: max-content;
+    }
+
+    &__item {
+        display: inline-flex;
+        align-items: center;
+        @include large-special-marquee;
+        color: $color_primary_main_blue;
+    }
+
+    /* pause on hover */
+    &[data-pause-on-hover='true']:hover .marquee__track,
+    &[data-pause-on-hover='true']:focus-within .marquee__track {
+        animation-play-state: paused;
+    }
+
+    /* direction classes */
+    &.marquee--left .marquee__track {
+        animation-name: marquee-move-x;
+        animation-direction: normal;
+    }
+    &.marquee--right .marquee__track {
+        animation-name: marquee-move-x;
+        animation-direction: reverse;
+    }
+
+    &.marquee--up .marquee__track {
+        flex-direction: column;
+        animation-name: marquee-move-y;
+        animation-direction: normal;
+    }
+    &.marquee--down .marquee__track {
+        flex-direction: column;
+        animation-name: marquee-move-y;
+        animation-direction: reverse;
+    }
+}
+
+/* animate to exact pixel shift (set --marquee-translate from JS) */
+@keyframes marquee-move-x {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(var(--marquee-translate, -100%));
+    }
+}
+
+@keyframes marquee-move-y {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(var(--marquee-translate, -100%));
+    }
+}
+// ...existing code...

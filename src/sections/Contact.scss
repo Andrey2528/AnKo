@@ -1,79 +1,163 @@
-// Contact Section Styles
-
-@import '@/styles/abstracts';
+@use '../styles/abstracts/index' as *;
 
 .contact {
-  padding: $spacing-3xl 0;
-  background: $color-bg;
+  padding: $spacing_3xl 0;
+  background: $gradient_blue_linear_2;
+  position: relative;
+
+  &__container {
+    max-width: $container_narrow;
+    margin: 0 auto;
+    padding: 0 $container_padding;
+
+    @media (max-width: $breakpoint_md) {
+      padding: 0 $container_padding_mobile;
+    }
+  }
 
   &__header {
     text-align: center;
-    margin-bottom: $spacing-2xl;
+    margin-bottom: $spacing_3xl;
   }
 
   &__title {
-    @include large-headers-h1;
-    color: $color-text-primary;
-    margin-bottom: $spacing-md;
-    
-    @include mobile {
-      @include medium-headers-h1;
+    font-size: $font_size_4xl;
+    font-weight: $font_weight_bold;
+    color: $color_primary_white_100;
+    margin-bottom: $spacing_md;
+
+    @media (max-width: $breakpoint_md) {
+      font-size: $font_size_3xl;
     }
   }
 
   &__subtitle {
-    @include large-body-paragraph;
-    color: $color-text-secondary;
+    font-size: $font_size_lg;
+    color: $color_secondary_white_90;
+    line-height: $line_height_relaxed;
   }
 
   &__form {
-    background: $color-white;
-    padding: $spacing-2xl;
-    border-radius: $radius-lg;
-    box-shadow: $shadow-md;
+    background: $color_bg;
+    padding: $spacing_2xl;
+    border-radius: $radius_2xl;
+    box-shadow: $shadow_2xl;
+
+    @media (max-width: $breakpoint_md) {
+      padding: $spacing_xl;
+    }
   }
 
-  &__form-group {
-    margin-bottom: $spacing-lg;
+  &__field {
+    margin-bottom: $spacing_lg;
 
-    label {
-      display: block;
-      @include large-body-name-block;
-      color: $color-text-primary;
-      margin-bottom: $spacing-xs;
+    &:last-of-type {
+      margin-bottom: $spacing_xl;
+    }
+  }
+
+  &__label {
+    display: block;
+    font-size: $font_size_sm;
+    font-weight: $font_weight_medium;
+    color: $color_primary_black_100;
+    margin-bottom: $spacing_xs;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: $spacing_sm $spacing_md;
+    font-size: $font_size_base;
+    font-family: $font_family_base;
+    color: $color_text;
+    background: $color_bg;
+    border: 2px solid $color_border;
+    border-radius: $radius_md;
+    transition: $transition_all;
+
+    &:focus {
+      outline: none;
+      border-color: $color_primary_main_blue;
+      box-shadow: 0 0 0 3px rgba(25, 132, 235, 0.1);
     }
 
-    input,
-    textarea {
-      width: 100%;
-      padding: $spacing-sm $spacing-md;
-      border: 2px solid $color-border;
-      border-radius: $radius-md;
-      font-family: $font-family-base;
-      @include large-body-paragraph;
-      transition: border-color $transition-normal;
+    &::placeholder {
+      color: $color_text_lighter;
+    }
+
+    &.error {
+      border-color: $color_error;
 
       &:focus {
-        outline: none;
-        border-color: $color-primary;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
       }
-
-      &::placeholder {
-        color: $color-text-muted;
-      }
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 120px;
     }
   }
 
-  @include mobile {
-    padding: $spacing-2xl 0;
+  &__textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
 
-    &__form {
-      padding: $spacing-xl $spacing-lg;
+  &__error {
+    display: block;
+    font-size: $font_size_sm;
+    color: $color_error;
+    margin-top: $spacing_xs;
+  }
+
+  &__button {
+    width: 100%;
+    padding: $spacing_md $spacing_xl;
+    font-size: $font_size_base;
+    font-weight: $font_weight_semibold;
+    color: $color_primary_white_100;
+    background: $color_primary_button_blue;
+    border: none;
+    border-radius: $radius_md;
+    cursor: pointer;
+    transition: $transition_all;
+
+    &:hover {
+      background: $color_primary_main_blue;
+      transform: translateY(-2px);
+      box-shadow: $shadow_lg;
     }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  &__info {
+    margin-top: $spacing_2xl;
+    padding-top: $spacing_2xl;
+    border-top: 1px solid $color_border_light;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing_lg;
+  }
+
+  &__info-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing_sm;
+
+    svg, i {
+      font-size: $font_size_xl;
+      color: $color_primary_main_blue;
+    }
+  }
+
+  &__info-text {
+    font-size: $font_size_sm;
+    color: $color_text_light;
   }
 }

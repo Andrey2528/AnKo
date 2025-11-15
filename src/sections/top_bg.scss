@@ -1,0 +1,14 @@
+@use '../styles/abstracts/index' as *;
+
+.top_bg {
+    // градієнт/колір першими — вони накладаються на картинку
+    background-image:
+        linear-gradient(rgba(27, 4, 190, 1), rgba(2, 84, 217, 0.8)),
+        url('../assets/images/bg-texture.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: $color_primary_white_100;
+    max-height: 900px;
+    height: 900px;
+}

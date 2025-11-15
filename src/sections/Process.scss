@@ -1,0 +1,38 @@
+@use '../styles/abstracts/index' as *;
+
+.process{
+    padding: 120px 0;
+    background: $color_primary_light_cyan;
+    position: relative;
+
+    &__header {
+        margin-bottom: 60px;
+    }
+
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    &__item {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 200px;
+        padding: 40px 0;
+        border-bottom: 1px solid $color_secondary_black_80;
+        align-items: start;
+
+        &:first-child {
+            border-top: 1px solid $color_secondary_black_80;
+        }
+
+        @media (max-width: 968px) {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 30px 0;
+        }
+    }
+
+}

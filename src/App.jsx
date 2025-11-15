@@ -1,28 +1,40 @@
 import React from 'react';
-import { Header, Footer } from './components/common';
-import { Hero, About, Services, Contact } from './sections';
-import './styles/globals.css';
+import { Routes, Route } from 'react-router-dom';
+import { Footer } from './components/common';
+import { Hero, About, Work, Services, Contact, Process } from './sections';
+import AdminPanel from './admin/AdminPanel';
+import Page from './pages/Page';
 
 /**
  * Main App Component
- * 
- * Головний компонент додатку з усіма секціями лендінгу
  */
+function MainContent() {
+    return (
+        <>
+            <main>
+                <Hero />
+                <About />
+                <Work />
+                <Services />
+                <Process/>
+                <Contact />
+            </main>
+
+            <Footer />
+        </>
+    );
+}
+
 function App() {
-  return (
-    <div className="app">
-      <Header />
-      
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Contact />
-      </main>
-      
-      <Footer />
-    </div>
-  );
+    return (
+        <div className="app">
+            <Routes>
+                <Route path="/" element={<MainContent />} />
+                <Route path="/admin" element={<AdminPanel />} />
+                    <Route path="/pages/:slug" element={<Page />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;

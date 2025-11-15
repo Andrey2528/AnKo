@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Button } from '../components/ui';
 import './Contact.scss';
+import { loadHomeSections, onHomeSectionsChange, offHomeSectionsChange } from '../api/homeSections';
 
 /**
  * Contact Section
@@ -8,68 +9,87 @@ import './Contact.scss';
  * Секція з контактною формою
  */
 const Contact = () => {
+  const [contactData, setContactData] = useState(null);
+
+  useEffect(() => {
+    const sections = loadHomeSections();
+    setContactData(sections.contact);
+
+    function handleChange() {
+      const sections = loadHomeSections();
+      setContactData(sections.contact);
+    }
+
+    onHomeSectionsChange(handleChange);
+    return () => offHomeSectionsChange(handleChange);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Обробка форми
     console.log('Form submitted');
   };
 
+  if (!contactData) return null;
+
+  const fields = contactData.formFields || {};
+
   return (
     <section id="contact" className="contact">
       <Container size="narrow">
         <div className="contact__header">
-          <h2 className="contact__title">Зв'яжіться з нами</h2>
+          <h2 className="contact__title">{contactData.title}</h2>
           <p className="contact__subtitle">
-            Готові почати ваш проект? Напишіть нам!
+            {contactData.subtitle}
           </p>
         </div>
 
         <form className="contact__form" onSubmit={handleSubmit}>
           <div className="contact__form-group">
-            <label htmlFor="name">Ім'я</label>
+            <label htmlFor="name">{fields.nameLabel}</label>
             <input 
               type="text" 
               id="name" 
               name="name" 
-              placeholder="Ваше ім'я"
+              placeholder={fields.namePlaceholder}
               required 
             />
           </div>
 
           <div className="contact__form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{fields.emailLabel}</label>
             <input 
               type="email" 
               id="email" 
               name="email" 
-              placeholder="your@email.com"
+              placeholder={fields.emailPlaceholder}
               required 
             />
           </div>
 
           <div className="contact__form-group">
-            <label htmlFor="phone">Телефон</label>
+            <label htmlFor="phone">{fields.phoneLabel}</label>
             <input 
               type="tel" 
               id="phone" 
               name="phone" 
-              placeholder="+380 XX XXX XX XX" 
+              placeholder={fields.phonePlaceholder} 
             />
           </div>
 
           <div className="contact__form-group">
-            <label htmlFor="message">Повідомлення</label>
+            <label htmlFor="message">{fields.messageLabel}</label>
             <textarea 
               id="message" 
               name="message" 
               rows="5" 
-              placeholder="Розкажіть про ваш проект..."
+              placeholder={fields.messagePlaceholder}
               required
             ></textarea>
           </div>
 
           <Button type="submit" variant="primary" size="large" fullWidth>
-            Відправити повідомлення
+            {contactData.submitButtonText}
           </Button>
         </form>
       </Container>

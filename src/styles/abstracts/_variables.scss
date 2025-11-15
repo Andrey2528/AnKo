@@ -7,176 +7,221 @@
 
 // Primary colors
 
-$color_primary-white-100: rgba(241, 244, 255, 1);
-$color_primary-light_cyan: rgba(234, 245, 245, 1);
-$color_primary-main_blue: rgba(25, 132, 235, 1);
-$color_primary-button_blue: rgba(2, 84, 217, 1);
-$color_primary-black-100: rgba(20, 20, 20, 1);
+$color_primary_white_100: rgba(241, 244, 255, 1);
+$color_primary_light_cyan: rgba(234, 245, 245, 1);
+$color_primary_main_blue: rgba(25, 132, 235, 1);
+$color_primary_button_blue: rgba(2, 84, 217, 1);
+$color_primary_black_100: rgba(20, 20, 20, 1);
 
 // Secondary colors
-$color_secondary-white-80: rgba(241, 244, 255, 0.8);
-$color_secondary-white-90: rgba(241, 244, 255, 0.9);
-$color_primary-black-80: rgba(20, 20, 20, 0.8);
-$color_primary-black-20: rgba(20, 20, 20, 0.2);
-$color_primary-orange: rgba(247, 80, 45, 1);
+$color_secondary_white_40: rgba(241, 244, 255, 0.4);
+$color_secondary_white_60: rgba(241, 244, 255, 0.6);
+$color_secondary_white_70: rgba(241, 244, 255, 0.7);
+$color_secondary_white_80: rgba(241, 244, 255, 0.8);
+$color_secondary_white_90: rgba(241, 244, 255, 0.9);
+$color_secondary_black_80: rgba(20, 20, 20, 0.8);
+$color_secondary_black_20: rgba(20, 20, 20, 0.2);
+$color_secondary_orange: rgba(247, 80, 45, 1);
+
+// Alias for backwards compatibility
+$color_primary_blue: $color_primary_main_blue;
 
 // Text colors
-$color-text: #1f2937;
-$color-text-light: #6b7280;
-$color-text-lighter: #9ca3af;
-$color-text-white: #ffffff;
+$color_text: #1f2937;
+$color_text_light: #6b7280;
+$color_text_lighter: #9ca3af;
+$color_text_white: #ffffff;
 
 // Background colors
-$color-bg: #ffffff;
-$color-bg-alt: #f9fafb;
-$color-bg-dark: #1f2937;
+$color_bg: #ffffff;
+$color_bg_alt: #f9fafb;
+$color_bg_dark: #1f2937;
 
 // Border colors
-$color-border: #e5e7eb;
-$color-border-light: #f3f4f6;
+$color_border: #e5e7eb;
+$color_border_light: #f3f4f6;
 
 // State colors
-$color-success: #10b981;
-$color-warning: #f59e0b;
-$color-error: #ef4444;
-$color-info: #3b82f6;
-
-// ============================================
-// SPACING
-// ============================================
-
-$spacing-xs: 0.5rem;    // 8px
-$spacing-sm: 1rem;      // 16px
-$spacing-md: 1.5rem;    // 24px
-$spacing-lg: 2rem;      // 32px
-$spacing-xl: 3rem;      // 48px
-$spacing-2xl: 4rem;     // 64px
-$spacing-3xl: 6rem;     // 96px
-
-// ============================================
-// TYPOGRAPHY
-// ============================================
-
-// Font families
-$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-$font-family-heading: $font-family-base;
-$font-family-mono: 'Courier New', Courier, monospace;
-
-// Font sizes
-$font-size-xs: 0.75rem;    // 12px
-$font-size-sm: 0.875rem;   // 14px
-$font-size-base: 1rem;     // 16px
-$font-size-lg: 1.125rem;   // 18px
-$font-size-xl: 1.25rem;    // 20px
-$font-size-2xl: 1.5rem;    // 24px
-$font-size-3xl: 2rem;      // 32px
-$font-size-4xl: 2.5rem;    // 40px
-$font-size-5xl: 3rem;      // 48px
-
-// Font weights
-$font-weight-light: 300;
-$font-weight-normal: 400;
-$font-weight-medium: 500;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
-$font-weight-extrabold: 800;
-
-// Line heights
-$line-height-tight: 1.2;
-$line-height-normal: 1.5;
-$line-height-relaxed: 1.6;
-$line-height-loose: 1.8;
-
-// ============================================
-// BORDER RADIUS
-// ============================================
-
-$radius-sm: 4px;
-$radius-md: 8px;
-$radius-lg: 12px;
-$radius-xl: 16px;
-$radius-2xl: 24px;
-$radius-full: 9999px;
-
-// ============================================
-// SHADOWS
-// ============================================
-
-$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-
-// ============================================
-// TRANSITIONS
-// ============================================
-
-$transition-fast: 150ms ease-in-out;
-$transition-base: 300ms ease-in-out;
-$transition-slow: 500ms ease-in-out;
-
-// Transition properties
-$transition-all: all $transition-base;
-$transition-colors: color $transition-base, background-color $transition-base, border-color $transition-base;
-$transition-transform: transform $transition-base;
-$transition-opacity: opacity $transition-base;
-
-// ============================================
-// BREAKPOINTS
-// ============================================
-
-$breakpoint-xs: 480px;
-$breakpoint-sm: 640px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
-$breakpoint-2xl: 1536px;
-
-// ============================================
-// Z-INDEX
-// ============================================
-
-$z-index-dropdown: 1000;
-$z-index-sticky: 1020;
-$z-index-fixed: 1030;
-$z-index-modal-backdrop: 1040;
-$z-index-modal: 1050;
-$z-index-popover: 1060;
-$z-index-tooltip: 1070;
-
-// ============================================
-// LAYOUT
-// ============================================
-
-$container-max-width: 1200px;
-$container-narrow: 800px;
-$container-wide: 1400px;
-$container-padding: 2rem;
-$container-padding-mobile: 1rem;
+$color_success: #10b981;
+$color_warning: #f59e0b;
+$color_error: #ef4444;
+$color_info: #3b82f6;
 
 // ============================================
 // GRADIENTS
 // ============================================
 
 // Базові градієнти
-$gradient_bright-yellow: linear-gradient(135deg, rgba(251, 255, 48, 1) 0%, rgba(251, 255, 48, 1) 100%);
-$gradient_neon-yellow: linear-gradient(135deg, rgba(249, 254, 2, 1) 0%, rgba(249, 254, 2, 1) 100%);
-$gradient_aqua: linear-gradient(135deg, rgba(0, 255, 224, 1) 0%, rgba(0, 255, 224, 1) 100%);
-$gradient_electric-cyan: linear-gradient(135deg, rgba(2, 239, 255, 1) 0%, rgba(2, 239, 255, 1) 100%);
-$gradient_sky-blue: linear-gradient(135deg, rgba(48, 143, 255, 0.9) 0%, rgba(48, 143, 255, 0.9) 100%);
-$gradient_deep-blue: linear-gradient(135deg, rgba(18, 14, 207, 1) 0%, rgba(18, 14, 207, 1) 100%);
-$gradient_royal-blue: linear-gradient(135deg, rgba(27, 4, 75, 1) 0%, rgba(27, 4, 75, 1) 100%);
+$gradient_bright_yellow: linear-gradient(
+    135deg,
+    rgba(251, 255, 48, 1) 0%,
+    rgba(251, 255, 48, 1) 100%
+);
+$gradient_neon_yellow: linear-gradient(
+    135deg,
+    rgba(249, 254, 2, 1) 0%,
+    rgba(249, 254, 2, 1) 100%
+);
+$gradient_aqua: linear-gradient(
+    135deg,
+    rgba(0, 255, 224, 1) 0%,
+    rgba(0, 255, 224, 1) 100%
+);
+$gradient_electric_cyan: linear-gradient(
+    135deg,
+    rgba(2, 239, 255, 1) 0%,
+    rgba(2, 239, 255, 1) 100%
+);
+$gradient_sky_blue: linear-gradient(
+    135deg,
+    rgba(48, 143, 255, 0.9) 0%,
+    rgba(48, 143, 255, 0.9) 100%
+);
+$gradient_deep_blue: linear-gradient(
+    135deg,
+    rgba(18, 14, 207, 1) 0%,
+    rgba(18, 14, 207, 1) 100%
+);
+$gradient_royal_blue: linear-gradient(
+    135deg,
+    rgba(27, 4, 75, 1) 0%,
+    rgba(27, 4, 75, 1) 100%
+);
 
 // Лінійні сині градієнти
-$gradient-blue-linear-1: linear-gradient(180deg, rgba(2, 133, 254, 1) 0%, rgba(27, 41, 203, 1) 100%);
-$gradient-blue-linear-2: linear-gradient(180deg, 
-  rgba(7, 0, 89, 1) 21%, 
-  rgba(101, 255, 237, 1) 57%, 
-  rgba(7, 0, 89, 1) 94%
+$gradient_blue_linear_1: linear-gradient(
+    180deg,
+    rgba(2, 133, 254, 1) 0%,
+    rgba(27, 41, 203, 1) 100%
 );
-$gradient-blue-linear-3: linear-gradient(180deg, 
-  rgba(2, 133, 254, 1) 0%, 
-  rgba(2, 133, 254, 1) 100%
+$gradient_blue_linear_2: linear-gradient(
+    180deg,
+    rgba(7, 0, 89, 1) 21%,
+    rgba(101, 255, 237, 1) 57%,
+    rgba(7, 0, 89, 1) 94%
 );
+$gradient_blue_linear_3: linear-gradient(
+    180deg,
+    rgba(2, 133, 254, 1) 0%,
+    rgba(2, 133, 254, 1) 100%
+);
+
+// ============================================
+// SPACING
+// ============================================
+
+$spacing_xs: 0.5rem; // 8px
+$spacing_sm: 1rem; // 16px
+$spacing_md: 1.5rem; // 24px
+$spacing_lg: 2rem; // 32px
+$spacing_xl: 3rem; // 48px
+$spacing_2xl: 4rem; // 64px
+$spacing_3xl: 6rem; // 96px
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+// Font families
+$font_family_base:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+$font_family_heading: $font_family_base;
+$font_family_mono: 'Courier New', Courier, monospace;
+
+// Font sizes
+$font_size_xs: 0.75rem; // 12px
+$font_size_sm: 0.875rem; // 14px
+$font_size_base: 1rem; // 16px
+$font_size_md: 1rem; // 16px (alias for base)
+$font_size_lg: 1.125rem; // 18px
+$font_size_xl: 1.25rem; // 20px
+$font_size_2xl: 1.5rem; // 24px
+$font_size_3xl: 2rem; // 32px
+$font_size_4xl: 2.5rem; // 40px
+$font_size_5xl: 3rem; // 48px
+
+// Font weights
+$font_weight_light: 300;
+$font_weight_normal: 400;
+$font_weight_medium: 500;
+$font_weight_semibold: 600;
+$font_weight_bold: 700;
+$font_weight_extrabold: 800;
+
+// Line heights
+$line_height_tight: 1.2;
+$line_height_normal: 1.5;
+$line_height_relaxed: 1.6;
+$line_height_loose: 1.8;
+
+// ============================================
+// BORDER RADIUS
+// ============================================
+
+$radius_sm: 4px;
+$radius_md: 8px;
+$radius_lg: 12px;
+$radius_xl: 16px;
+$radius_2xl: 24px;
+$radius_full: 9999px;
+
+// ============================================
+// SHADOWS
+// ============================================
+
+$shadow_sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow_md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$shadow_lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+$shadow_xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+$shadow_2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+// ============================================
+// TRANSITIONS
+// ============================================
+
+$transition_fast: 150ms ease-in-out;
+$transition_base: 300ms ease-in-out;
+$transition_slow: 500ms ease-in-out;
+
+// Transition properties
+$transition_all: all $transition_base;
+$transition_colors:
+    color $transition_base,
+    background-color $transition_base,
+    border-color $transition_base;
+$transition_transform: transform $transition_base;
+$transition_opacity: opacity $transition_base;
+
+// ============================================
+// BREAKPOINTS
+// ============================================
+
+$breakpoint_xs: 480px;
+$breakpoint_sm: 640px;
+$breakpoint_md: 768px;
+$breakpoint_lg: 1024px;
+$breakpoint_xl: 1280px;
+$breakpoint_2xl: 1536px;
+
+// ============================================
+// Z_INDEX
+// ============================================
+
+$z_index_dropdown: 1000;
+$z_index_sticky: 1020;
+$z_index_fixed: 1030;
+$z_index_modal_backdrop: 1040;
+$z_index_modal: 1050;
+$z_index_popover: 1060;
+$z_index_tooltip: 1070;
+
+// ============================================
+// LAYOUT
+// ============================================
+
+$container_max_width: 1200px;
+$container_narrow: 800px;
+$container_wide: 1400px;
+$container_padding: 2rem;
+$container_padding_mobile: 1rem;

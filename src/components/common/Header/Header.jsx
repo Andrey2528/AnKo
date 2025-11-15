@@ -21,21 +21,22 @@ const Header = () => {
   }, []);
 
   const navItems = [
-    { label: 'Головна', href: '#hero' },
-    { label: 'Про нас', href: '#about' },
-    { label: 'Послуги', href: '#services' },
-    { label: 'Портфоліо', href: '#portfolio' },
-    { label: 'Команда', href: '#team' },
-    { label: 'Контакти', href: '#contact' }
+    { label: 'About', href: '#about' },
+    { label: 'Work', href: '#work' },
+    { label: 'Services', href: '#services' },
+    { label: 'How', href: '#how' },
+    { label: 'Pricing', href: '#pricing' },
+    { label: 'F.A.Q.', href: '#faq' },
+    { label: 'Contact', href: '#contact' }
   ];
 
   return (
     <header className={`header ${isScrolled ? 'header--scrolled' : ''}`}>
       <Container>
         <div className="header__content">
-          <div className="header__logo">
-            <a href="#hero">AnKo</a>
-          </div>
+            <a href="#hero" className="header__logo">
+              <img src="/src/assets/images/Mainlogowhite.png" alt="" />
+            </a>
 
           <nav className={`header__nav ${isMobileMenuOpen ? 'header__nav--open' : ''}`}>
             {navItems.map((item, index) => (
@@ -49,22 +50,6 @@ const Header = () => {
               </a>
             ))}
           </nav>
-
-          <div className="header__actions">
-            <Button variant="primary" size="small">
-              Зв'язатися
-            </Button>
-          </div>
-
-          <button 
-            className="header__mobile-toggle"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
         </div>
       </Container>
     </header>

@@ -1,92 +1,47 @@
-// About Section Styles
-
-@import '@/styles/abstracts';
+@use '../styles/abstracts/index' as *;
 
 .about {
-  padding: $spacing-3xl 0;
-  background: $color-bg;
-
-  &__header {
-    text-align: center;
-    margin-bottom: $spacing-2xl;
-  }
-
-  &__title {
-    @include large-headers-h1;
-    color: $color-text-primary;
-    margin-bottom: $spacing-md;
-    
-    @include mobile {
-      @include medium-headers-h1;
-    }
-  }
-
-  &__subtitle {
-    @include large-body-paragraph;
-    color: $color-text-secondary;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  &__content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-2xl;
-    align-items: center;
-  }
-
-  &__text {
-    h3 {
-      @include large-headers-h2;
-      color: $color-text-primary;
-      margin-bottom: $spacing-lg;
-    }
-
-    p {
-      @include large-body-paragraph;
-      color: $color-text-secondary;
-      margin-bottom: $spacing-md;
-    }
-  }
-
-  &__stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: $spacing-lg;
-  }
-
-  &__stat-card {
-    text-align: center;
-    padding: $spacing-xl $spacing-md;
-  }
-
-  &__stat-value {
-    @include large-headers-main-title;
-    @include gradient-text($gradient-primary);
-    margin-bottom: $spacing-xs;
-  }
-
-  &__stat-label {
-    @include large-body-secondary-text;
-    color: $color-text-secondary;
-    font-weight: $font-weight-medium;
-  }
-
-  @include mobile {
-    padding: $spacing-2xl 0;
+    padding: 120px 0;
+    background: $color_primary_main_blue;
+    position: relative;
 
     &__content {
-      grid-template-columns: 1fr;
-      gap: $spacing-xl;
+        max-width: $container_max_width;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+
+        @media (max-width: $breakpoint_md) {
+            padding: 0 $container_padding_mobile;
+        }
     }
 
-    &__stats {
-      grid-template-columns: repeat(2, 1fr);
-      gap: $spacing-md;
+    &__header {
+        margin-bottom: 60px;
     }
 
-    &__stat-card {
-      padding: $spacing-lg $spacing-xs;
+    &__title {
+        @include large-body-name-block;
+        color: $color_secondary_white_80;
+        margin-bottom: $spacing_md;
+
+        @media (max-width: $breakpoint_md) {
+            font-size: $font_size_3xl;
+        }
     }
-  }
+
+    &__text {
+        @include large-headers-h1;
+        color: $color_secondary_white_90;
+        width: 966px;
+        &-wrapper {
+            width: 500px;
+            margin-left: auto;
+            margin-top: 135px;
+        }
+        &-small {
+            @include large-body-paragraph;
+            color: $color_primary_white_100;
+        }
+    }
 }

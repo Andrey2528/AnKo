@@ -1,36 +1,10 @@
 import React from 'react';
-import './Container.scss';
+import './Container.css';
 
-/**
- * Container Component
- * 
- * Контейнер для центрування контенту з обмеженням максимальної ширини
- * 
- * @param {Object} props - Властивості компонента
- * @param {React.ReactNode} props.children - Вміст контейнера
- * @param {string} props.size - Розмір: 'default' | 'narrow' | 'wide' | 'fluid'
- * @param {string} props.className - Додаткові CSS класи
- * 
- * @example
- * <Container size="narrow">
- *   <h1>Заголовок</h1>
- *   <p>Контент</p>
- * </Container>
- */
-const Container = ({ 
-  children, 
-  className = '', 
-  size = 'default',
-  ...props 
-}) => {
-  const containerClasses = [
-    'container',
-    size !== 'default' && `container--${size}`,
-    className
-  ].filter(Boolean).join(' ');
-
+const Container = ({ children, className = '', fluid = false, ...rest }) => {
+  const base = `container ${fluid ? 'container--fluid' : ''} ${className}`.trim();
   return (
-    <div className={containerClasses} {...props}>
+    <div className={base} {...rest}>
       {children}
     </div>
   );

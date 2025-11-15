@@ -1,69 +1,64 @@
-// Services Section Styles
-
-@import '@/styles/abstracts';
+@use '../styles/abstracts/index' as *;
 
 .services {
-  padding: $spacing-3xl 0;
-  background: $color-white;
+    padding: 120px 0;
+    background: $color_primary_black_100;
+    position: relative;
 
-  &__header {
-    text-align: center;
-    margin-bottom: $spacing-2xl;
-  }
-
-  &__title {
-    @include large-headers-h1;
-    color: $color-text-primary;
-    margin-bottom: $spacing-md;
-    
-    @include mobile {
-      @include medium-headers-h1;
+    &__header {
+        margin-bottom: 60px;
     }
-  }
 
-  &__subtitle {
-    @include large-body-paragraph;
-    color: $color-text-secondary;
-    max-width: 600px;
-    margin: 0 auto;
-  }
+    &__title {
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: $spacing-xl;
-  }
-
-  &__card {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: $spacing-md;
-  }
-
-  &__icon {
-    font-size: 48px;
-    margin-bottom: $spacing-xs;
-  }
-
-  &__card-title {
-    @include large-headers-h2;
-    color: $color-text-primary;
-    margin: 0;
-  }
-
-  &__card-description {
-    @include large-body-paragraph;
-    color: $color-text-secondary;
-    flex-grow: 1;
-  }
-
-  @include mobile {
-    padding: $spacing-2xl 0;
-
-    &__grid {
-      grid-template-columns: 1fr;
-      gap: $spacing-lg;
     }
-  }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    &__item {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 200px;
+        padding: 40px 0;
+        border-bottom: 1px solid $color_secondary_white_90;
+        align-items: start;
+
+        &:first-child {
+            border-top: 1px solid $color_secondary_white_90;
+        }
+
+        @media (max-width: 968px) {
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 30px 0;
+        }
+    }
+
+    &__item-title {
+        font-size: 32px;
+        font-weight: 500;
+        color: #fff;
+        margin: 0;
+        line-height: 1.2;
+
+        @media (max-width: 968px) {
+            font-size: 24px;
+        }
+    }
+
+    &__item-description {
+        font-size: 16px;
+        line-height: 1.7;
+        color: $color_secondary_white_90;
+        margin: 0;
+        max-width: 500px;
+
+        @media (max-width: 968px) {
+            font-size: 15px;
+        }
+    }
 }

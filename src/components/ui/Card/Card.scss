@@ -1,55 +1,210 @@
-// Card Component Styles
-// Базовий компонент картки для контенту
-
-@import '@/styles/abstracts';
+@use '../../../styles/abstracts/index' as *;
 
 .card {
-  background: $color-bg;
-  border-radius: $radius-lg;
-  padding: $spacing-lg;
-  box-shadow: $shadow-md;
-  transition: $transition-all;
+  background: $color_bg;
+  border-radius: $radius_xl;
+  overflow: hidden;
+  box-shadow: $shadow_md;
+  transition: $transition_all;
+  position: relative;
 
-  &--hover {
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: $shadow-xl;
-    }
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow_xl;
   }
 
   &--bordered {
-    border: 1px solid $color-border;
-    box-shadow: none;
+    border: 1px solid $color_border;
   }
 
-  &--elevated {
-    box-shadow: $shadow-lg;
+  &--highlight {
+    border-top: 4px solid $color_primary_main_blue;
   }
 
-  // Card header
-  &__header {
-    margin-bottom: $spacing-md;
-    
-    h3 {
-      margin: 0;
-      font-size: $font-size-2xl;
-      font-weight: $font-weight-bold;
-      color: $color-text;
+  &__image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: $transition_transform;
+    }
+
+    &:hover img {
+      transform: scale(1.1);
     }
   }
 
+  &__badge {
+    position: absolute;
+    top: $spacing_md;
+    right: $spacing_md;
+    padding: $spacing_xs $spacing_sm;
+    font-size: $font_size_xs;
+    font-weight: $font_weight_semibold;
+    color: $color_primary_white_100;
+    background: $color_primary_orange;
+    border-radius: $radius_full;
+    z-index: 1;
+  }
+
   &__content {
-    color: $color-text-light;
-    line-height: $line-height-relaxed;
+    padding: $spacing_xl;
+  }
+
+  &__header {
+    margin-bottom: $spacing_md;
+  }
+
+  &__category {
+    display: inline-block;
+    font-size: $font_size_xs;
+    font-weight: $font_weight_medium;
+    color: $color_primary_main_blue;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: $spacing_xs;
+  }
+
+  &__title {
+    font-size: $font_size_xl;
+    font-weight: $font_weight_semibold;
+    color: $color_primary_black_100;
+    margin-bottom: $spacing_sm;
+    line-height: $line_height_tight;
+  }
+
+  &__description {
+    font-size: $font_size_base;
+    color: $color_text_light;
+    line-height: $line_height_relaxed;
+    margin-bottom: $spacing_lg;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: $spacing_lg;
+    font-size: $font_size_sm;
+    color: $color_text_lighter;
+    margin-bottom: $spacing_lg;
+  }
+
+  &__meta-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing_xs;
+
+    svg, i {
+      font-size: $font_size_base;
+    }
   }
 
   &__footer {
-    margin-top: $spacing-md;
-    padding-top: $spacing-sm;
-    border-top: 1px solid $color-border;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: $spacing_md;
+    border-top: 1px solid $color_border_light;
   }
 
-  @include mobile {
-    padding: $spacing-md;
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing_xs;
+    color: $color_primary_main_blue;
+    font-size: $font_size_sm;
+    font-weight: $font_weight_medium;
+    text-decoration: none;
+    transition: $transition_all;
+
+    &:hover {
+      color: $color_primary_button_blue;
+      gap: $spacing_sm;
+    }
+
+    svg {
+      transition: $transition_transform;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing_sm;
+  }
+
+  &__icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: $color_bg_alt;
+    border: none;
+    border-radius: $radius_md;
+    color: $color_text_light;
+    cursor: pointer;
+    transition: $transition_all;
+
+    &:hover {
+      background: $color_primary_main_blue;
+      color: $color_primary_white_100;
+      transform: translateY(-2px);
+    }
+  }
+
+  // Варіанти карток
+  &--horizontal {
+    display: flex;
+
+    .card__image {
+      width: 40%;
+      height: auto;
+    }
+
+    .card__content {
+      flex: 1;
+    }
+
+    @media (max-width: $breakpoint_md) {
+      flex-direction: column;
+
+      .card__image {
+        width: 100%;
+        height: 200px;
+      }
+    }
+  }
+
+  &--minimal {
+    box-shadow: none;
+    background: transparent;
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .card__content {
+      padding: $spacing_md 0;
+    }
+  }
+
+  &--gradient {
+    background: $gradient_blue_linear_1;
+    color: $color_primary_white_100;
+
+    .card__title,
+    .card__description {
+      color: $color_primary_white_100;
+    }
+
+    .card__category {
+      color: $color_secondary_white_90;
+    }
   }
 }

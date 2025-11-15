@@ -1,0 +1,19 @@
+@use '../../../styles/abstracts/index' as *;
+
+.section__title{
+    font-family: 'Roboto Mono';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+
+    &.white{
+      color: $color_secondary_white_80;
+    }
+    &.dark{
+        color: $color_secondary_black_80;
+    }
+}

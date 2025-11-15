@@ -1,0 +1,115 @@
+@use '../styles/abstracts/index' as *;
+
+.work {
+    padding: 24px 0;
+    background: $color_primary_light_cyan;
+    .container {
+        margin: 80px auto 120px auto;
+    }
+
+    &__content {
+        max-width: $container_max_width;
+
+        @media (max-width: $breakpoint_md) {
+            padding: 0 $container_padding_mobile;
+        }
+    }
+
+    &__header {
+        margin-bottom: $spacing_md;
+    }
+
+    &__title {
+        @include large-body-name-block;
+        color: $color_secondary_black_80;
+        margin-bottom: 60px;
+
+        @media (max-width: $breakpoint_md) {
+            font-size: $font_size_3xl;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        padding: $spacing_md 0;
+        border-top: 1px solid $color_primary_black_100;
+        border-bottom: 1px solid $color_primary_black_100;
+        /* Плавні переходи для тіні, фону і відступів */
+        transition:
+            background-color 360ms cubic-bezier(0.2, 0.8, 0.2, 1),
+            padding 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+
+        &:nth-child(n + 1) {
+            border-bottom: none;
+        }
+        &:nth-last-child(1) {
+            border-bottom: 1px solid $color_primary_black_100;
+        }
+
+        &:hover {
+            background-color: $color_primary_black_100;
+            padding: $spacing_md 12px;
+            .work__card-title {
+                color: $color_primary_white_100;
+            }
+            .work__card-list_item {
+                background: $color_primary_light_cyan;
+                color: $color_primary_black_100;
+            }
+        }
+
+        &-list {
+            list-style: none;
+            display: flex;
+            gap: $spacing_xs;
+            &_item {
+                @include large-special-tag;
+                background: $color_primary_black_100;
+                color: $color_primary_light_cyan;
+                padding: 0 1rem;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                /* Плавні переходи для змін фону/кольору */
+                transition:
+                    background-color 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
+                    color 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+            }
+        }
+
+        &-item__wrapper {
+            display: flex;
+            gap: 32px;
+        }
+    }
+
+    &__card-title {
+        @include large-headers-h1;
+        color: $color_primary_black_100;
+    }
+    .card__link {
+        background-color: $color_primary_button_blue;
+        @include large-special-button;
+        color: $color_primary_light_cyan;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 2px;
+        cursor: pointer;
+        gap: 12px;
+        display: flex;
+
+        &:hover {
+            background-color: $color_primary_main_blue;
+        }
+    }
+}

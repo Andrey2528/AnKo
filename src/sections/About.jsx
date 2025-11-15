@@ -1,56 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Card } from '../components/ui';
 import './About.scss';
+import { loadHomeSections, onHomeSectionsChange, offHomeSectionsChange } from '../api/homeSections';
+import SectionTitle from '../components/ui/SectionTitle/SectionTitle';
 
 /**
  * About Section
- * 
+ *
  * Секція "Про компанію"
  */
 const About = () => {
-  const stats = [
-    { value: '100+', label: 'Проектів' },
-    { value: '50+', label: 'Клієнтів' },
-    { value: '5+', label: 'Років досвіду' },
-    { value: '24/7', label: 'Підтримка' }
-  ];
+    const [aboutData, setAboutData] = useState(null);
 
-  return (
-    <section id="about" className="about">
-      <Container>
-        <div className="about__header">
-          <h2 className="about__title">Про нас</h2>
-          <p className="about__subtitle">
-            Ми команда професіоналів, які створюють цифрові рішення
-          </p>
-        </div>
+    useEffect(() => {
+        const sections = loadHomeSections();
+        setAboutData(sections.about);
 
-        <div className="about__content">
-          <div className="about__text">
-            <h3>Наша місія</h3>
-            <p>
-              Ми прагнемо допомагати бізнесу досягати своїх цілей через інноваційні 
-              технологічні рішення. Наша команда спеціалізується на розробці веб-додатків, 
-              дизайні та цифровому маркетингу.
-            </p>
-            <p>
-              З роками досвіду ми навчилися розуміти потреби наших клієнтів і 
-              створювати продукти, які приносять реальну цінність.
-            </p>
-          </div>
+        function handleChange() {
+            const sections = loadHomeSections();
+            setAboutData(sections.about);
+        }
 
-          <div className="about__stats">
-            {stats.map((stat, index) => (
-              <Card key={index} className="about__stat-card">
-                <div className="about__stat-value">{stat.value}</div>
-                <div className="about__stat-label">{stat.label}</div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
+        onHomeSectionsChange(handleChange);
+        return () => offHomeSectionsChange(handleChange);
+    }, []);
+
+    if (!aboutData) return null;
+
+    return (
+        <section id="about" className="about">
+            <Container>
+                <div className="about__header">
+                    <SectionTitle title={aboutData.title} theme='white'/>
+                </div>
+                <div className="about__content">
+                    <div className="about__text">
+                        {aboutData.mainText}
+                    </div>
+                    <div className="about__text-wrapper">
+                        <div className="about__text-small">
+                            {aboutData.secondaryText}
+                        </div>
+                    </div>
+                </div>
+            </Container>
+        </section>
+    );
 };
 
 export default About;
