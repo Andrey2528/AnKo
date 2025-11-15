@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Footer } from './components/common';
-import { Hero, About, Work, Services, Contact, Process } from './sections';
+import { Hero, About, Work, Services, Contact, Process, Pricing, Faq } from './sections';
 import AdminPanel from './admin/AdminPanel';
 import Page from './pages/Page';
 
@@ -17,6 +17,8 @@ function MainContent() {
                 <Work />
                 <Services />
                 <Process/>
+                <Pricing />
+                <Faq />
                 <Contact />
             </main>
 

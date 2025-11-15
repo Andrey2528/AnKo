@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Button } from '../components/ui';
+import { Container, Button, Marquee } from '../../components/ui';
 import './Contact.scss';
-import { loadHomeSections } from '../api/firestore/homeSections';
+import { loadHomeSections } from '../../api/firestore/homeSections';
 
 /**
  * Contact Section
@@ -11,6 +11,8 @@ import { loadHomeSections } from '../api/firestore/homeSections';
 const Contact = () => {
   const [contactData, setContactData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const marqueContactText = 'Let’s reach out and work together. Let’s reach out and work together.';
 
   useEffect(() => {
     async function fetchData() {
@@ -39,13 +41,11 @@ const Contact = () => {
 
   return (
     <section id="contact" className="contact">
+      <Marquee direction="left" speed={60} pauseOnHover={false}>
+        {marqueContactText}
+      </Marquee>
       <Container size="narrow">
-        <div className="contact__header">
-          <h2 className="contact__title">{contactData.title}</h2>
-          <p className="contact__subtitle">
-            {contactData.subtitle}
-          </p>
-        </div>
+        
 
         <form className="contact__form" onSubmit={handleSubmit}>
           <div className="contact__form-group">

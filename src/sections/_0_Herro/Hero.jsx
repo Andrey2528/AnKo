@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Button } from '../components/ui';
+import { Container, Button } from '../../components/ui';
 import './Hero.scss';
 import './top_bg.scss';
-import { Header } from '../components/common';
-import { loadHomeSections } from '../api/firestore/homeSections';
+import { Header } from '../../components/common';
+import { loadHomeSections } from '../../api/firestore/homeSections';
 
 /**
  * Hero Section

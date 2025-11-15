@@ -1,11 +1,11 @@
   import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Card, Marquee } from '../components/ui';
+import { Container, Card, Marquee } from '../../components/ui';
 import './Work.scss';
-import { getProjects } from '../api/firestore/projects';
-import { getPages } from '../api/firestore/pages';
-import { loadHomeSections } from '../api/firestore/homeSections';
-import SectionTitle from '../components/ui/SectionTitle/SectionTitle';
+import { getProjects } from '../../api/firestore/projects';
+import { getPages } from '../../api/firestore/pages';
+import { loadHomeSections } from '../../api/firestore/homeSections';
+import SectionTitle from '../../components/ui/SectionTitle/SectionTitle';
 
 /**
  * Work Section — projects are loaded from Firestore

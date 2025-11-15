@@ -1,0 +1,30 @@
+@use '../../../../styles/abstracts/index.scss' as *;
+
+.option-button {
+  background-color: transparent;
+    color: $color_primary_black_100;
+    border: 1px solid $color_primary_black_100;
+    padding: 16px 24px;
+    @include large-special-allcaps;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+
+    &:hover {
+      background-color: $color_primary_black_100;
+      color: $color_primary_white_100;
+      transform: translateY(-1px);
+    }
+
+    &.active {
+      background-color: $color_primary_black_100;
+      color: $color_primary_white_100;
+    }
+
+    @media (max-width: 768px) {
+      padding: 8px 16px;
+      font-size: 12px;
+      flex: 1 1 calc(50% - 4px);
+      min-width: 120px;
+    }
+}

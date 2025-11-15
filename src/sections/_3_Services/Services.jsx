@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from '../components/ui';
+import { Container } from '../../components/ui';
 import './Services.scss';
-import { loadHomeSections } from '../api/firestore/homeSections';
-import SectionTitle from '../components/ui/SectionTitle/SectionTitle';
+import { loadHomeSections } from '../../api/firestore/homeSections';
+import SectionTitle from '../../components/ui/SectionTitle/SectionTitle';
 
 /**
  * Services Section

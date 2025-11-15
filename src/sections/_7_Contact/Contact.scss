@@ -1,9 +1,13 @@
-@use '../styles/abstracts/index' as *;
+@use '../../styles/abstracts/index.scss' as *;
 
 .contact {
-  padding: $spacing_3xl 0;
-  background: $gradient_blue_linear_2;
+  padding: 24px 0;
+  background: $color_primary_main_blue;
   position: relative;
+
+  .marquee__item{
+    color: $color_primary_light_cyan;
+  }
 
   &__container {
     max-width: $container_narrow;

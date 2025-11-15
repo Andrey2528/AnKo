@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, SectionTitle } from '../components/ui';
+import { Container, SectionTitle } from '../../components/ui';
 import './Process.scss';
 
 /**

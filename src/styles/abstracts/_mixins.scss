@@ -306,6 +306,20 @@
 // SPECIAL TYPOGRAPHY
 // ============================================
 
+//Large/Tab/AllCaps
+@mixin large-special-allcaps{
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 100%;
+leading-trim: both;
+text-edge: cap;
+display: flex;
+align-items: center;
+text-transform: uppercase;
+}
+
 // Large - Special/Marquee
 @mixin large-special-marquee {
     font-family: Roboto;
@@ -344,10 +358,12 @@
 // Large - Special/ContactButton
 @mixin large-special-contact-button {
     font-family: 'Roboto Mono';
-    font-size: 16px;
     font-style: normal;
     font-weight: 400;
+    font-size: 16px;
     line-height: 120%;
+    leading-trim: both;
+    text-edge: cap;
 }
 
 // Large - Special/FooterSocial
