@@ -8,99 +8,100 @@ const DataContext = createContext();
 // Кеш для даних
 let cachedData = null;
 let cacheTime = null;
-const CACHE_DURATION = 5 * 60 * 1000; // 5 хвилин
+let loadingPromise = null;
+const CACHE_DURATION = 10 * 60 * 1000; // 10 хвилин
 
 export const DataProvider = ({ children }) => {
   const [data, setData] = useState({
     homeSections: null,
     projects: null,
     pages: null,
-    loading: true,
+    loading: false,
     error: null
   });
 
-  useEffect(() => {
-    const loadData = async () => {
-      // Перевіряємо кеш
-      const now = Date.now();
-      if (cachedData && cacheTime && (now - cacheTime) < CACHE_DURATION) {
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Функція для ледачого завантаження даних
+  const loadData = async () => {
+    const now = Date.now();
+    
+    // Якщо є свіжий кеш - повертаємо його
+    if (cachedData && cacheTime && (now - cacheTime) < CACHE_DURATION) {
+      if (!isInitialized) {
         setData({ ...cachedData, loading: false });
-        return;
+        setIsInitialized(true);
       }
+      return cachedData;
+    }
 
-      try {
-        setData(prev => ({ ...prev, loading: true, error: null }));
+    // Якщо вже йде завантаження - чекаємо його
+    if (loadingPromise) {
+      return loadingPromise;
+    }
 
-        // Завантажуємо всі дані одночасно
-        const [homeSections, projects, pages] = await Promise.all([
-          loadHomeSections(),
-          getProjects(),
-          getPages()
-        ]);
+    try {
+      setData(prev => ({ ...prev, loading: true, error: null }));
 
+      // Зберігаємо promise щоб уникнути дублювання запитів
+      loadingPromise = Promise.all([
+        loadHomeSections(),
+        getProjects(),
+        getPages()
+      ]).then(([homeSections, projects, pages]) => {
         const newData = {
           homeSections,
           projects,
           pages,
-          loading: false,
-          error: null
         };
 
         // Зберігаємо в кеш
         cachedData = newData;
         cacheTime = now;
+        loadingPromise = null;
 
-        setData(newData);
-      } catch (error) {
-        console.error('Error loading data:', error);
-        setData(prev => ({
-          ...prev,
+        setData({
+          ...newData,
           loading: false,
-          error: error.message
-        }));
-      }
-    };
+          error: null
+        });
+        setIsInitialized(true);
 
-    loadData();
-  }, []);
+        return newData;
+      });
 
-  const refreshData = async () => {
-    cachedData = null;
-    cacheTime = null;
-    
-    try {
-      setData(prev => ({ ...prev, loading: true, error: null }));
-
-      const [homeSections, projects, pages] = await Promise.all([
-        loadHomeSections(),
-        getProjects(),
-        getPages()
-      ]);
-
-      const newData = {
-        homeSections,
-        projects,
-        pages,
-        loading: false,
-        error: null
-      };
-
-      cachedData = newData;
-      cacheTime = Date.now();
-
-      setData(newData);
+      return await loadingPromise;
     } catch (error) {
-      console.error('Error refreshing data:', error);
+      console.error('Error loading data:', error);
+      loadingPromise = null;
       setData(prev => ({
         ...prev,
         loading: false,
         error: error.message
       }));
+      throw error;
     }
   };
 
+  // Автоматичне завантаження при першому рендері (з невеликою затримкою)
+  useEffect(() => {
+    // Затримка 100мс для пріоритетного рендерінгу UI
+    const timer = setTimeout(() => {
+      loadData();
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const refreshData = async () => {
+    cachedData = null;
+    cacheTime = null;
+    loadingPromise = null;
+    return loadData();
+  };
+
   return (
-    <DataContext.Provider value={{ ...data, refreshData }}>
+    <DataContext.Provider value={{ ...data, refreshData, loadData }}>
       {children}
     </DataContext.Provider>
   );

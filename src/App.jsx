@@ -1,16 +1,17 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Footer } from './components/common';
-import { Hero, About } from './sections';
 import { DataProvider } from './contexts/DataContext';
 
-// Lazy loading для секцій що не в першому viewport
+// Lazy loading для ВСІХ секцій та компонентів
+const Hero = lazy(() => import('./sections/_0_Herro/Hero'));
+const About = lazy(() => import('./sections/_1_About/About'));
 const Work = lazy(() => import('./sections/_2_Work/Work'));
 const Services = lazy(() => import('./sections/_3_Services/Services'));
 const Process = lazy(() => import('./sections/_4_Process/Process'));
 const Pricing = lazy(() => import('./sections/_5_Pricing/Pricing'));
 const Faq = lazy(() => import('./sections/_6_FAQ/Faq'));
 const Contact = lazy(() => import('./sections/_7_Contact/Contact'));
+const Footer = lazy(() => import('./components/common/Footer/Footer'));
 const AdminPanel = lazy(() => import('./admin/AdminPanel'));
 const Page = lazy(() => import('./pages/Page'));
 
@@ -35,9 +36,9 @@ function MainContent() {
     return (
         <>
             <main>
-                <Hero />
-                <About />
                 <Suspense fallback={<LoadingFallback />}>
+                    <Hero />
+                    <About />
                     <Work />
                     <Services />
                     <Process />
@@ -46,6 +47,9 @@ function MainContent() {
                     <Contact />
                 </Suspense>
             </main>
+            <Suspense fallback={null}>
+                <Footer />
+            </Suspense>
         </>
     );
 }

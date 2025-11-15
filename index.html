@@ -8,7 +8,13 @@
         <!-- Performance Optimization -->
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="preconnect" href="https://firestore.googleapis.com" />
+        
+        <!-- Preload critical fonts -->
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@400;600&family=Roboto+Mono:wght@400;700&display=swap" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@400;600&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
         <!-- SEO -->
         <title>AnKo Team</title>
@@ -50,10 +56,6 @@
 
         <!-- Additional meta tags -->
         <meta name="theme-color" content="#ffffff" />
-    <!-- Preconnect & Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@400;600&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     </head>
     <body>
         <div id="root"></div>
