@@ -5,19 +5,27 @@
     background: $color_primary_main_blue;
     position: relative;
 
+    @media (max-width: $breakpoint_lg) {
+        padding: 80px 0;
+    }
+
+    @media (max-width: $breakpoint_md) {
+        padding: 60px 0;
+    }
+
     &__content {
         max-width: $container_max_width;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-
-        @media (max-width: $breakpoint_md) {
-            padding: 0 $container_padding_mobile;
-        }
     }
 
     &__header {
         margin-bottom: 60px;
+
+        @media (max-width: $breakpoint_md) {
+            margin-bottom: 40px;
+        }
     }
 
     &__title {
@@ -28,20 +36,58 @@
         @media (max-width: $breakpoint_md) {
             font-size: $font_size_3xl;
         }
+
+        @media (max-width: $breakpoint_sm) {
+            font-size: $font_size_2xl;
+        }
     }
 
     &__text {
         @include large-headers-h1;
         color: $color_secondary_white_90;
         width: 966px;
+        max-width: 100%;
+
+        @media (max-width: $breakpoint_lg) {
+            width: 100%;
+            font-size: $font_size_3xl;
+        }
+
+        @media (max-width: $breakpoint_md) {
+            font-size: $font_size_2xl;
+        }
+
+        @media (max-width: $breakpoint_sm) {
+            font-size: $font_size_2xl;
+        }
+
         &-wrapper {
             width: 500px;
+            max-width: 100%;
             margin-left: auto;
             margin-top: 135px;
+
+            @media (max-width: $breakpoint_lg) {
+                margin-top: 80px;
+            }
+
+            @media (max-width: $breakpoint_md) {
+                width: 100%;
+                margin-top: 40px;
+            }
         }
+
         &-small {
             @include large-body-paragraph;
             color: $color_primary_white_100;
+
+            @media (max-width: $breakpoint_md) {
+                font-size: $font_size_xl;
+            }
+
+            @media (max-width: $breakpoint_sm) {
+                font-size: $font_size_xl;
+            }
         }
     }
 }

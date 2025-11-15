@@ -51,23 +51,53 @@
   &__nav {
     display: flex;
     gap: $spacing_md;
-    &-item{
-      @include large-headers-menu;
-      color: $color_primary_white_100;
-    }
+
     @media (max-width: $breakpoint_lg) {
       position: fixed;
       top: 70px;
       left: 0;
       width: 100%;
       height: calc(100vh - 70px);
-      background: $color_bg;
+      background: $color_primary_main_blue;
+      flex-direction: column;
       padding: $spacing_xl;
       transform: translateX(-100%);
-      transition: $transition_transform;
+      transition: transform 0.3s ease-in-out;
+      gap: $spacing_lg;
+      overflow-y: auto;
+      z-index: $z_index_fixed;
+    }
 
-      &.active {
+    @media (max-width: $breakpoint_md) {
+      top: 70px;
+      height: calc(100vh - 70px);
+    }
+
+    &--open {
+      @media (max-width: $breakpoint_lg) {
         transform: translateX(0);
+      }
+    }
+
+    &-item {
+      @include large-headers-menu;
+      color: $color_primary_white_100;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $color_primary_light_cyan;
+      }
+
+      @media (max-width: $breakpoint_lg) {
+        font-size: $font_size_2xl;
+        padding: $spacing_sm 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      @media (max-width: $breakpoint_md) {
+        font-size: $font_size_xl;
       }
     }
   }
@@ -145,22 +175,32 @@
     border: none;
     cursor: pointer;
     padding: $spacing_xs;
+    z-index: $z_index_modal;
 
     @media (max-width: $breakpoint_lg) {
       display: flex;
     }
 
     span {
-      width: 24px;
-      height: 2px;
-      background: $color_primary_black_100;
-      transition: $transition_all;
+      width: 28px;
+      height: 3px;
+      background: $color_primary_white_100;
+      transition: all 0.3s ease;
       border-radius: $radius_sm;
+
+      @media (max-width: $breakpoint_md) {
+        width: 24px;
+        height: 2px;
+      }
     }
 
-    &.active {
+    &--active {
       span:nth-child(1) {
-        transform: rotate(45deg) translate(8px, 8px);
+        transform: rotate(45deg) translate(9px, 9px);
+
+        @media (max-width: $breakpoint_md) {
+          transform: rotate(45deg) translate(7px, 7px);
+        }
       }
 
       span:nth-child(2) {
@@ -168,7 +208,11 @@
       }
 
       span:nth-child(3) {
-        transform: rotate(-45deg) translate(8px, -8px);
+        transform: rotate(-45deg) translate(9px, -9px);
+
+        @media (max-width: $breakpoint_md) {
+          transform: rotate(-45deg) translate(7px, -7px);
+        }
       }
     }
   }

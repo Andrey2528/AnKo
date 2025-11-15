@@ -97,6 +97,11 @@
         justify-content: flex-start;
         width: 100%;
         gap: 340px;
+        @media (max-width: $breakpoint_md) {
+            flex-direction: column;
+            gap: 30px;
+            align-items: flex-end;
+        }
     }
 
     &__content {
@@ -122,6 +127,7 @@
 
         @media (max-width: $breakpoint_md) {
             font-size: $font_size_3xl;
+            width: unset;
         }
     }
 
@@ -129,6 +135,10 @@
         position: relative;
         display: inline-block;
         z-index: 3;
+        @media (max-width: $breakpoint_md) {
+                            color: red;
+
+            }
 
         &::before {
             content: '';
@@ -144,6 +154,7 @@
             background-position: center;
             pointer-events: none;
             z-index: 4;
+            
         }
     }
 

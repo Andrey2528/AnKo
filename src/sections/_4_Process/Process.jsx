@@ -39,7 +39,6 @@ const Process = () => {
         <div className="process__list">
           {processData.items && processData.items.map((item, index) => (
             <div key={item.id || index} className="process__item">
-              <div className="process__item-number">{String(index + 1).padStart(2, '0')}</div>
               <div className="process__item-content">
                 <h3 className="process__item-title">{item.title}</h3>
                 <p className="process__item-description">{item.description}</p>

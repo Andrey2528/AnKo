@@ -1,13 +1,23 @@
 @import '../../../../styles/abstracts/index';
 
 .form-container {
-   background: $color_primary_light_cyan;
-    border-radius: 8px;
-    padding: 32px;
-    max-width: 1200px;
-    margin: 0 auto;
+  background: $color_primary_light_cyan;
+  border-radius: 8px;
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
 
-    @media (max-width: 768px) {
-      padding: 30px 20px;
-    }
+  @media (max-width: $breakpoint_md) {
+    padding: 24px 20px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px 16px;
+    border-radius: 0;
+  }
+
+  @media (max-width: $breakpoint_sm) {
+    padding: 16px 12px;
+  }
 }

@@ -160,9 +160,64 @@
   
   .project-gallery {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   
   .project-title {
     font-size: $font_size_3xl;
+  }
+
+  .project-header {
+    margin-bottom: 32px;
+  }
+
+  .project-tech,
+  .project-content {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: $breakpoint_sm) {
+  .project-page {
+    padding: 32px 0 60px;
+  }
+
+  .page-not-found {
+    padding: 60px 0;
+
+    h2 {
+      font-size: $font_size_2xl;
+    }
+  }
+
+  .project-title {
+    font-size: $font_size_2xl;
+  }
+
+  .project-gallery {
+    gap: 12px;
+  }
+
+  .project-header {
+    margin-bottom: 24px;
+  }
+
+  .project-tech,
+  .project-content {
+    margin-bottom: 24px;
+  }
+
+  .project-link {
+    width: 100%;
+    text-align: center;
+  }
+
+  .tech-list {
+    gap: 8px;
+  }
+
+  .tech-item {
+    padding: 6px 12px;
+    font-size: $font_size_sm;
   }
 }
