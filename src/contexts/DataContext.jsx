@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { loadHomeSections } from '../api/firestore/homeSections';
-import { loadProjects } from '../api/firestore/projects';
-import { loadPages } from '../api/firestore/pages';
+import { getProjects } from '../api/firestore/projects';
+import { getPages } from '../api/firestore/pages';
 
 const DataContext = createContext();
 
@@ -34,8 +34,8 @@ export const DataProvider = ({ children }) => {
         // Завантажуємо всі дані одночасно
         const [homeSections, projects, pages] = await Promise.all([
           loadHomeSections(),
-          loadProjects(),
-          loadPages()
+          getProjects(),
+          getPages()
         ]);
 
         const newData = {
@@ -73,8 +73,8 @@ export const DataProvider = ({ children }) => {
 
       const [homeSections, projects, pages] = await Promise.all([
         loadHomeSections(),
-        loadProjects(),
-        loadPages()
+        getProjects(),
+        getPages()
       ]);
 
       const newData = {
