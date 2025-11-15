@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Button } from '../components/ui';
 import './Hero.scss';
 import './top_bg.scss';
-import { Header } from '@/components/common';
+import { Header } from '../components/common';
 import { loadHomeSections, onHomeSectionsChange, offHomeSectionsChange } from '../api/homeSections';
 
 /**
