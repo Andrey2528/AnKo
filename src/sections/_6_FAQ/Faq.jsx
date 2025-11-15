@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, SectionTitle } from '../../components/ui';
 import './Faq.scss';
-import { loadHomeSections } from '../../api/firestore/homeSections';
+import { useData } from '../../contexts/DataContext';
 
 /**
  * FAQ Section
@@ -10,29 +10,15 @@ import { loadHomeSections } from '../../api/firestore/homeSections';
  */
 const Faq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const [faqData, setFaqData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const sections = await loadHomeSections();
-        setFaqData(sections.faq);
-      } catch (error) {
-        console.error('Error loading FAQ data:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
+  const { homeSections, loading } = useData();
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  if (loading || !faqData) return null;
+  if (loading || !homeSections?.faq) return null;
+
+  const faqData = homeSections.faq;
 
   return (
     <section id="faq" className="faq">

@@ -48,7 +48,7 @@ const Header = () => {
       <Container>
         <div className="header__content">
           <a href="#hero" className="header__logo">
-            <img src="/src/assets/images/Mainlogowhite.png" alt="AnKo Logo" />
+            <img src="/src/assets/images/Main logo white.svg" alt="AnKo Logo" />
           </a>
 
           {/* Backdrop для мобільного меню */}

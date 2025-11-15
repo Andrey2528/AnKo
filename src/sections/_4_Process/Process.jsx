@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Container, SectionTitle } from '../../components/ui';
 import './Process.scss';
-import { loadHomeSections } from '../../api/firestore/homeSections';
+import { useData } from '../../contexts/DataContext';
 
 /**
  * Process Section
@@ -9,25 +9,11 @@ import { loadHomeSections } from '../../api/firestore/homeSections';
  * Секція з процесом роботи
  */
 const Process = () => {
-  const [processData, setProcessData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { homeSections, loading } = useData();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const sections = await loadHomeSections();
-        setProcessData(sections.process);
-      } catch (error) {
-        console.error('Error loading process data:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
+  if (loading || !homeSections?.process) return null;
 
-    fetchData();
-  }, []);
-
-  if (loading || !processData) return null;
+  const processData = homeSections.process;
 
   return (
     <section id="process" className="process">
