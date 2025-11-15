@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from '../components/ui';
 import './Services.scss';
-import { loadHomeSections, onHomeSectionsChange, offHomeSectionsChange } from '../api/homeSections';
+import { loadHomeSections } from '../api/firestore/homeSections';
 import SectionTitle from '../components/ui/SectionTitle/SectionTitle';
 
 /**
@@ -11,21 +11,24 @@ import SectionTitle from '../components/ui/SectionTitle/SectionTitle';
  */
 const Services = () => {
   const [servicesData, setServicesData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const sections = loadHomeSections();
-    setServicesData(sections.services);
-
-    function handleChange() {
-      const sections = loadHomeSections();
-      setServicesData(sections.services);
+    async function fetchData() {
+      try {
+        const sections = await loadHomeSections();
+        setServicesData(sections.services);
+      } catch (error) {
+        console.error('Error loading services data:', error);
+      } finally {
+        setLoading(false);
+      }
     }
 
-    onHomeSectionsChange(handleChange);
-    return () => offHomeSectionsChange(handleChange);
+    fetchData();
   }, []);
 
-  if (!servicesData) return null;
+  if (loading || !servicesData) return null;
 
   return (
     <section id="services" className="services">

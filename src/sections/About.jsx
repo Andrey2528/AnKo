@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Card } from '../components/ui';
 import './About.scss';
-import { loadHomeSections, onHomeSectionsChange, offHomeSectionsChange } from '../api/homeSections';
+import { loadHomeSections } from '../api/firestore/homeSections';
 import SectionTitle from '../components/ui/SectionTitle/SectionTitle';
 
 /**
@@ -11,21 +11,24 @@ import SectionTitle from '../components/ui/SectionTitle/SectionTitle';
  */
 const About = () => {
     const [aboutData, setAboutData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const sections = loadHomeSections();
-        setAboutData(sections.about);
-
-        function handleChange() {
-            const sections = loadHomeSections();
-            setAboutData(sections.about);
+        async function fetchData() {
+            try {
+                const sections = await loadHomeSections();
+                setAboutData(sections.about);
+            } catch (error) {
+                console.error('Error loading about data:', error);
+            } finally {
+                setLoading(false);
+            }
         }
 
-        onHomeSectionsChange(handleChange);
-        return () => offHomeSectionsChange(handleChange);
+        fetchData();
     }, []);
 
-    if (!aboutData) return null;
+    if (loading || !aboutData) return null;
 
     return (
         <section id="about" className="about">

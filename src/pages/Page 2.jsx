@@ -1,39 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Container } from '../components/ui';
-import { getPageBySlug } from '../api/firestore/pages';
+import { loadPages, onPagesChange, offPagesChange } from '../api/pages';
 import './Page.scss';
 
 export default function Page() {
   const { slug } = useParams();
   const [page, setPage] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchPage() {
-      try {
-        const foundPage = await getPageBySlug(slug);
-        setPage(foundPage);
-      } catch (error) {
-        console.error('Error loading page:', error);
-        setPage(null);
-      } finally {
-        setLoading(false);
-      }
+    function refresh() {
+      const pages = loadPages();
+      const found = pages.find((p) => p.slug === slug);
+      setPage(found || null);
     }
 
-    fetchPage();
+    refresh();
+    onPagesChange(refresh);
+    return () => offPagesChange(refresh);
   }, [slug]);
-
-  if (loading) {
-    return (
-      <section className="page-loading">
-        <Container>
-          <p>Loading...</p>
-        </Container>
-      </section>
-    );
-  }
 
   if (!page) {
     return (

@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { loadPages, addPage, updatePage, removePage, onPagesChange, offPagesChange } from '../../api/pages';
+import { 
+  getPages, 
+  createPage, 
+  updatePage as updatePageFirestore, 
+  deletePage 
+} from '../../api/firestore/pages';
 import PageForm from './forms/PageForm';
 import { Toast } from '../../components/ui';
 
@@ -7,40 +12,67 @@ export default function PagesTab() {
   const [pages, setPages] = useState([]);
   const [editing, setEditing] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
-    setPages(loadPages());
-    function onChange() {
-      setPages(loadPages());
-    }
-    onPagesChange(onChange);
-    return () => offPagesChange(onChange);
+    fetchPages();
   }, []);
 
-  function handleAdd(payload) {
-    // ensure slug uniqueness by appending timestamp if needed
-    const existing = loadPages().find((p) => p.slug === payload.slug);
-    if (existing && (!editing || existing.id !== editing.id)) {
-      payload.slug = payload.slug + '-' + Date.now();
+  async function fetchPages() {
+    try {
+      const data = await getPages();
+      setPages(data);
+    } catch (error) {
+      console.error('Error loading pages:', error);
+      setToast({ message: 'Помилка завантаження сторінок', type: 'error' });
+    } finally {
+      setLoading(false);
     }
-    addPage(payload);
-    setEditing(null);
-    setShowForm(false);
-    setToast({ message: 'Сторінку успішно додано!', type: 'success' });
   }
 
-  function handleEditSave(payload) {
-    updatePage(editing.id, payload);
-    setEditing(null);
-    setShowForm(false);
-    setToast({ message: 'Сторінку успішно оновлено!', type: 'success' });
+  async function handleAdd(payload) {
+    try {
+      await createPage(payload);
+      await fetchPages(); // Reload pages
+      setEditing(null);
+      setShowForm(false);
+      setToast({ message: 'Сторінку успішно додано!', type: 'success' });
+    } catch (error) {
+      console.error('Error creating page:', error);
+      const message = error.message.includes('already exists') 
+        ? 'Сторінка з таким slug вже існує' 
+        : 'Помилка створення сторінки';
+      setToast({ message, type: 'error' });
+    }
   }
 
-  function handleDelete(id) {
-    if (!confirm('Delete this page?')) return;
-    removePage(id);
-    setToast({ message: 'Сторінку успішно видалено!', type: 'success' });
+  async function handleEditSave(payload) {
+    try {
+      await updatePageFirestore(editing.id, payload);
+      await fetchPages(); // Reload pages
+      setEditing(null);
+      setShowForm(false);
+      setToast({ message: 'Сторінку успішно оновлено!', type: 'success' });
+    } catch (error) {
+      console.error('Error updating page:', error);
+      const message = error.message.includes('already exists') 
+        ? 'Сторінка з таким slug вже існує' 
+        : 'Помилка оновлення сторінки';
+      setToast({ message, type: 'error' });
+    }
+  }
+
+  async function handleDelete(id) {
+    if (!confirm('Видалити цю сторінку?')) return;
+    try {
+      await deletePage(id);
+      await fetchPages(); // Reload pages
+      setToast({ message: 'Сторінку успішно видалено!', type: 'success' });
+    } catch (error) {
+      console.error('Error deleting page:', error);
+      setToast({ message: 'Помилка видалення сторінки', type: 'error' });
+    }
   }
 
   function handleEdit(page) {

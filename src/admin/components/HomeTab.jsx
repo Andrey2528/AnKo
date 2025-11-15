@@ -1,30 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import { loadHomeSections, updateSection, onHomeSectionsChange, offHomeSectionsChange } from '../../api/homeSections';
+import { loadHomeSections, saveHomeSection } from '../../api/firestore/homeSections';
 import { Toast } from '../../components/ui';
 import ProjectsTab from './ProjectsTab';
 
 export default function HomeTab() {
   const [sections, setSections] = useState(null);
   const [activeSection, setActiveSection] = useState('hero');
-  const [hasChanges, setHasChanges] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
-    setSections(loadHomeSections());
-    function onChange() {
-      setSections(loadHomeSections());
+    async function fetchSections() {
+      try {
+        const data = await loadHomeSections();
+        setSections(data);
+      } catch (error) {
+        console.error('Error loading sections:', error);
+        setToast({ message: 'Помилка завантаження даних', type: 'error' });
+      } finally {
+        setLoading(false);
+      }
     }
-    onHomeSectionsChange(onChange);
-    return () => offHomeSectionsChange(onChange);
+    fetchSections();
   }, []);
 
-  function handleSave(sectionName, data) {
-    updateSection(sectionName, data);
-    setHasChanges(false);
-    setToast({ message: 'Зміни успішно збережено!', type: 'success' });
+  async function handleSave(sectionName, data) {
+    try {
+      await saveHomeSection(sectionName, data);
+      // Reload sections to get updated data
+      const updatedSections = await loadHomeSections();
+      setSections(updatedSections);
+      setToast({ message: 'Зміни успішно збережено!', type: 'success' });
+    } catch (error) {
+      console.error('Error saving section:', error);
+      setToast({ message: 'Помилка збереження даних', type: 'error' });
+    }
   }
 
-  if (!sections) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
+  if (!sections) return <p>No data available</p>;
 
   const sectionTabs = [
     { id: 'hero', label: 'Hero Section', icon: '🚀' },

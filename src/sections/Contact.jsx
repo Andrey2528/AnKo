@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Button } from '../components/ui';
 import './Contact.scss';
-import { loadHomeSections, onHomeSectionsChange, offHomeSectionsChange } from '../api/homeSections';
+import { loadHomeSections } from '../api/firestore/homeSections';
 
 /**
  * Contact Section
@@ -10,18 +10,21 @@ import { loadHomeSections, onHomeSectionsChange, offHomeSectionsChange } from '.
  */
 const Contact = () => {
   const [contactData, setContactData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const sections = loadHomeSections();
-    setContactData(sections.contact);
-
-    function handleChange() {
-      const sections = loadHomeSections();
-      setContactData(sections.contact);
+    async function fetchData() {
+      try {
+        const sections = await loadHomeSections();
+        setContactData(sections.contact);
+      } catch (error) {
+        console.error('Error loading contact data:', error);
+      } finally {
+        setLoading(false);
+      }
     }
 
-    onHomeSectionsChange(handleChange);
-    return () => offHomeSectionsChange(handleChange);
+    fetchData();
   }, []);
 
   const handleSubmit = (e) => {
@@ -30,7 +33,7 @@ const Contact = () => {
     console.log('Form submitted');
   };
 
-  if (!contactData) return null;
+  if (loading || !contactData) return null;
 
   const fields = contactData.formFields || {};
 

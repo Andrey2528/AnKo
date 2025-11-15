@@ -2,38 +2,40 @@
 import { Link } from 'react-router-dom';
 import { Container, Card, Marquee } from '../components/ui';
 import './Work.scss';
-import { loadProjects, onProjectsChange, offProjectsChange } from '../api/projects';
-import { loadPages } from '../api/pages';
-import { loadHomeSections, onHomeSectionsChange, offHomeSectionsChange } from '../api/homeSections';
+import { getProjects } from '../api/firestore/projects';
+import { getPages } from '../api/firestore/pages';
+import { loadHomeSections } from '../api/firestore/homeSections';
 import SectionTitle from '../components/ui/SectionTitle/SectionTitle';
 
 /**
- * Work Section — projects are loaded from localStorage via projects API
+ * Work Section — projects are loaded from Firestore
  */
 const Work = () => {
     const [projects, setProjects] = useState([]);
     const [pages, setPages] = useState([]);
     const [workData, setWorkData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setProjects(loadProjects());
-        setPages(loadPages());
-        
-        const sections = loadHomeSections();
-        setWorkData(sections.work);
-        
-        function handleChange() {
-            setProjects(loadProjects());
-            setPages(loadPages());
-            const sections = loadHomeSections();
-            setWorkData(sections.work);
+        async function fetchData() {
+            try {
+                const [projectsData, pagesData, sections] = await Promise.all([
+                    getProjects(),
+                    getPages(),
+                    loadHomeSections()
+                ]);
+                
+                setProjects(projectsData);
+                setPages(pagesData);
+                setWorkData(sections.work);
+            } catch (error) {
+                console.error('Error loading work data:', error);
+            } finally {
+                setLoading(false);
+            }
         }
-        onProjectsChange(handleChange);
-        onHomeSectionsChange(handleChange);
-        return () => {
-            offProjectsChange(handleChange);
-            offHomeSectionsChange(handleChange);
-        };
+
+        fetchData();
     }, []);
 
     // Helper to find if project has a dedicated page

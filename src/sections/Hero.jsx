@@ -3,7 +3,7 @@ import { Container, Button } from '../components/ui';
 import './Hero.scss';
 import './top_bg.scss';
 import { Header } from '../components/common';
-import { loadHomeSections, onHomeSectionsChange, offHomeSectionsChange } from '../api/homeSections';
+import { loadHomeSections } from '../api/firestore/homeSections';
 
 /**
  * Hero Section
@@ -12,21 +12,24 @@ import { loadHomeSections, onHomeSectionsChange, offHomeSectionsChange } from '.
  */
 const Hero = () => {
   const [heroData, setHeroData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const sections = loadHomeSections();
-    setHeroData(sections.hero);
-
-    function handleChange() {
-      const sections = loadHomeSections();
-      setHeroData(sections.hero);
+    async function fetchData() {
+      try {
+        const sections = await loadHomeSections();
+        setHeroData(sections.hero);
+      } catch (error) {
+        console.error('Error loading hero data:', error);
+      } finally {
+        setLoading(false);
+      }
     }
 
-    onHomeSectionsChange(handleChange);
-    return () => offHomeSectionsChange(handleChange);
+    fetchData();
   }, []);
 
-  if (!heroData) return null;
+  if (loading || !heroData) return null;
 
   return (
     <div className='top_bg'>

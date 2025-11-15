@@ -2,7 +2,7 @@
 export const GITHUB_CONFIG = {
   owner: import.meta.env.VITE_GITHUB_OWNER || 'Andrey2528',
   repo: import.meta.env.VITE_GITHUB_REPO || 'AnKo',
-  branch: import.meta.env.VITE_GITHUB_BRANCH || 'main',
+  branch: import.meta.env.VITE_GITHUB_BRANCH || 'master',
   token: import.meta.env.VITE_GITHUB_TOKEN || '', // Personal Access Token with repo permissions
   imagePath: 'src/assets/images/uploads' // Path where images will be stored
 };

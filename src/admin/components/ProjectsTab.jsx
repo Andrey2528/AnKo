@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {
-  loadProjects,
-  addProject,
-  updateProject,
-  removeProject,
-  onProjectsChange,
-  offProjectsChange,
-} from '../../api/projects';
+  getProjects,
+  createProject,
+  updateProject as updateProjectFirestore,
+  deleteProject,
+} from '../../api/firestore/projects';
 import ProjectForm from './forms/ProjectForm';
 import { Toast } from '../../components/ui';
 
@@ -14,35 +12,61 @@ export default function ProjectsTab() {
   const [projects, setProjects] = useState([]);
   const [editing, setEditing] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState(null);
 
   useEffect(() => {
-    setProjects(loadProjects());
-    function onChange() {
-      setProjects(loadProjects());
-    }
-    onProjectsChange(onChange);
-    return () => offProjectsChange(onChange);
+    fetchProjects();
   }, []);
 
-  function handleAdd(payload) {
-    addProject(payload);
-    setEditing(null);
-    setShowForm(false);
-    setToast({ message: 'Проект успішно додано!', type: 'success' });
+  async function fetchProjects() {
+    try {
+      const data = await getProjects();
+      setProjects(data);
+    } catch (error) {
+      console.error('Error loading projects:', error);
+      setToast({ message: 'Помилка завантаження проектів', type: 'error' });
+    } finally {
+      setLoading(false);
+    }
   }
 
-  function handleEditSave(payload) {
-    updateProject(editing.id, payload);
-    setEditing(null);
-    setShowForm(false);
-    setToast({ message: 'Проект успішно оновлено!', type: 'success' });
+  async function handleAdd(payload) {
+    try {
+      await createProject(payload);
+      await fetchProjects(); // Reload projects
+      setEditing(null);
+      setShowForm(false);
+      setToast({ message: 'Проект успішно додано!', type: 'success' });
+    } catch (error) {
+      console.error('Error creating project:', error);
+      setToast({ message: 'Помилка створення проекту', type: 'error' });
+    }
   }
 
-  function handleDelete(id) {
-    if (!confirm('Delete this project?')) return;
-    removeProject(id);
-    setToast({ message: 'Проект успішно видалено!', type: 'success' });
+  async function handleEditSave(payload) {
+    try {
+      await updateProjectFirestore(editing.id, payload);
+      await fetchProjects(); // Reload projects
+      setEditing(null);
+      setShowForm(false);
+      setToast({ message: 'Проект успішно оновлено!', type: 'success' });
+    } catch (error) {
+      console.error('Error updating project:', error);
+      setToast({ message: 'Помилка оновлення проекту', type: 'error' });
+    }
+  }
+
+  async function handleDelete(id) {
+    if (!confirm('Видалити цей проект?')) return;
+    try {
+      await deleteProject(id);
+      await fetchProjects(); // Reload projects
+      setToast({ message: 'Проект успішно видалено!', type: 'success' });
+    } catch (error) {
+      console.error('Error deleting project:', error);
+      setToast({ message: 'Помилка видалення проекту', type: 'error' });
+    }
   }
 
   function handleEdit(project) {
